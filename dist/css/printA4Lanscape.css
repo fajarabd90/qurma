@@ -1,0 +1,71 @@
+body {
+    background: rgb(237 237 237);
+    margin: 0;
+    line-height: 1.4;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+page {
+    background: #ffffff;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 0.5cm;
+    -webkit-box-shadow: 0 2px 7px 2px rgb(0 0 0 / 10%);
+    box-shadow: 0 2px 7px 2px rgb(0 0 0 / 10%);
+    margin-top: 20px;
+    position: relative;
+}
+
+page[size="A4"] {
+    width: 21cm;
+    height: 29.7cm;
+}
+
+page[size="A4"][layout="landscape"] {
+    width: 29.7cm;
+    height: 21cm;
+    _background: #ffa103;
+    user-select: none;
+}
+
+@page {
+    margin: 0;
+    size: A4 landscape;
+}
+
+@media print {
+    /*Disable Tahfidz logo*/
+
+    body {
+        width: 29.7cm;
+        height: 21cm;
+        margin: 0;
+        line-height: 1;
+        font-family: Arial, Helvetica, sans-serif;
+        background: none;
+        margin-top: -2px;
+        background-color: #999999;
+        font-size: 11.5pt;
+        line-height: 1.4
+    }
+
+    page {
+        background: #ffffff;
+        margin: 0;
+        margin-top: 0;
+        position: relative;
+
+    }
+
+    page[size="A4"] {
+        width: 21cm;
+        height: 29.7cm;
+    }
+
+    page[size="A4"][layout="landscape"] {
+        width: 100%;
+        height: 21cm;
+        overflow: hidden;
+    }
+
+}
