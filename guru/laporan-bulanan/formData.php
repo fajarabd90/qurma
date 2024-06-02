@@ -44,6 +44,7 @@ $guru = $user['nama'];
                     <th>Capaian Juz Tahfizh</th>
                     <th>Capaian Surat/Ayat Tahfizh</th>
                     <th>Ketuntasan Tahfizh</th>
+                    <th>Catatan</th>
                 </tr>
             </thead>
             <tbody>
@@ -64,18 +65,18 @@ $guru = $user['nama'];
                         // Pastikan $data['nama'] telah didefinisikan sebelum digunakan
                         $namaValue = ucwords(strtolower($row['nama']));
 
-                        echo "<td style='width: 23%;'>";
+                        echo "<td style='width: 20%;'>";
                         echo "<input type='text' class='form-control' name='nama[]' value='" . $namaValue . "'>";
                         echo "</td>";
 
                         echo "<td style='width: 5%;'>" . $row['kelas'] . "</td>";
 
-                        echo "<td style='width: 14%; display: none;'>
+                        echo "<td style='display: none;'>
                             <input type='hidden' class='bulan-input' name='bulan[]'>
                             <span class='bulan-display'></span>
                         </td>";
 
-                        echo "<td style='width: 15%;'>
+                        echo "<td style='width: 10%;'>
                             <select class='form-select' aria-label='Default select example' name='jilid[]' required>";
                         echo "<option selected>Pilih Jilid</option>";
                         echo "<option value='1'>1</option>";
@@ -94,7 +95,7 @@ $guru = $user['nama'];
                         </td>";
 
                         echo "<td style='width: 8%;'><input type='text' class='form-control' name='halaman[]'></td>";
-                        echo "<td style='width: 15%;'>
+                        echo "<td style='width: 10%;'>
                             <select class='form-select' aria-label='Default select example' name='ketuntasan_tartil[]' required>";
                         echo "<option selected>Pilih Status</option>";
                         echo "<option value='Tuntas'>Tuntas</option>";
@@ -109,14 +110,15 @@ $guru = $user['nama'];
                         }
                         echo "</select>
                         </td>";
-                        echo "<td style='width: 20%;'><input type='text' oninput='showAlert(this)' class='form-control' name='surat[]'></td>";
-                        echo "<td style='width: 15%;'>
+                        echo "<td style='width: 10%;'><input type='text' oninput='showAlert(this)' class='form-control' name='surat[]'></td>";
+                        echo "<td style='width: 10%;'>
                             <select class='form-select' aria-label='Default select example' name='ketuntasan_tahfizh[]' required>";
                         echo "<option selected>Pilih Status</option>";
                         echo "<option value='Tuntas'>Tuntas</option>";
                         echo "<option value='Belum Tuntas'>Belum Tuntas</option>";
                         echo "</select>
                         </td>";
+                        echo "<td style='width: 10%;'><input type='text' class='form-control' name='catatan[]'></td>";
                         echo "</tr>";
                         $nomor++;
                     }

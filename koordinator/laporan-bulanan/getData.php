@@ -18,7 +18,7 @@ $selectedTeacher = isset($_GET['teacherFilter']) ? $_GET['teacherFilter'] : '';
 $selectedKelas = isset($_GET['kelasFilter']) ? $_GET['kelasFilter'] : '';
 $searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
 
-$sql = mysqli_query($conn, "SELECT laporan.id, siswa.lembaga, laporan.nama, siswa.kelas, kelompok.guru, laporan.bulan, laporan.jilid, laporan.halaman, laporan.ketuntasan_tartil, laporan.juz, laporan.surat, laporan.ketuntasan_tahfizh
+$sql = mysqli_query($conn, "SELECT laporan.id, siswa.lembaga, laporan.nama, siswa.kelas, kelompok.guru, laporan.bulan, laporan.jilid, laporan.halaman, laporan.ketuntasan_tartil, laporan.juz, laporan.surat, laporan.ketuntasan_tahfizh, laporan.catatan
 FROM siswa
 INNER JOIN laporan ON siswa.nama = laporan.nama
 INNER JOIN kelompok ON siswa.nama = kelompok.nama 
@@ -44,8 +44,9 @@ ORDER BY siswa.kelas, laporan.nama ASC");
                 <th scope="col">Hal./ Ayat</th>
                 <th scope="col">Ketuntasan Tartil</th>
                 <th scope="col">Capaian Tahfizh Juz</th>
-                <th scope="col">Surat/Ayat</th>
+                <th scope="col">Surat/Ayat Tahfizh</th>
                 <th scope="col">Ketuntasan Tahfizh</th>
+                <th scope="col">Catatan</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -68,6 +69,7 @@ ORDER BY siswa.kelas, laporan.nama ASC");
                     <td><?php echo $data['juz']; ?></td>
                     <td><?php echo $data['surat']; ?></td>
                     <td><?php echo $data['ketuntasan_tahfizh']; ?></td>
+                    <td><?php echo $data['catatan']; ?></td>
                     <td><?php echo "<center>$link_update</center>"; ?></td>
                 </tr>
             <?php } ?>

@@ -188,128 +188,6 @@ $tahun = date("Y");
                         <a href="tes-tahfizh/index.php" class="btn btn-link p-0">Lihat</a>
                     </div>
 
-                    <?php
-                    //Total siswa
-                    $kelas1_siswa = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM siswa WHERE lembaga = '$lembaga' AND kelas LIKE '1%'"));
-                    $kelas2_siswa = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM siswa WHERE lembaga = '$lembaga' AND kelas LIKE '2%'"));
-                    $kelas3_siswa = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM siswa WHERE lembaga = '$lembaga' AND kelas LIKE '3%'"));
-                    $kelas4_siswa = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM siswa WHERE lembaga = '$lembaga' AND kelas LIKE '4%'"));
-                    $kelas5_siswa = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM siswa WHERE lembaga = '$lembaga' AND kelas LIKE '5%'"));
-                    $kelas6_siswa = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM siswa WHERE lembaga = '$lembaga' AND kelas LIKE '6%'"));
-
-                    //Total tuntas
-                    $kelas1_tuntas = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '1%' AND ketuntasan_tartil = 'Tuntas'"));
-                    $kelas2_tuntas = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '2%' AND ketuntasan_tartil = 'Tuntas'"));
-                    $kelas3_tuntas = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '3%' AND ketuntasan_tartil = 'Tuntas'"));
-                    $kelas4_tuntas = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '4%' AND ketuntasan_tartil = 'Tuntas'"));
-                    $kelas5_tuntas = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '5%' AND ketuntasan_tartil = 'Tuntas'"));
-                    $kelas6_tuntas = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '6%' AND ketuntasan_tartil = 'Tuntas'"));
-
-                    //Total tuntas
-                    $kelas1_belum = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '1%' AND ketuntasan_tartil = 'Belum Tuntas'"));
-                    $kelas2_belum = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '2%' AND ketuntasan_tartil = 'Belum Tuntas'"));
-                    $kelas3_belum = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '3%' AND ketuntasan_tartil = 'Belum Tuntas'"));
-                    $kelas4_belum = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '4%' AND ketuntasan_tartil = 'Belum Tuntas'"));
-                    $kelas5_belum = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '5%' AND ketuntasan_tartil = 'Belum Tuntas'"));
-                    $kelas6_belum = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '6%' AND ketuntasan_tartil = 'Belum Tuntas'"));
-
-                    //Total jilid 1
-                    $kelas1_1 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '1%' AND jilid = '1'"));
-                    $kelas2_1 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '2%' AND jilid = '1'"));
-                    $kelas3_1 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '3%' AND jilid = '1'"));
-                    $kelas4_1 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '4%' AND jilid = '1'"));
-                    $kelas5_1 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '5%' AND jilid = '1'"));
-                    $kelas6_1 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '6%' AND jilid = '1'"));
-
-                    //Total jilid 2
-                    $kelas1_2 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '1%' AND jilid = '2'"));
-                    $kelas2_2 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '2%' AND jilid = '2'"));
-                    $kelas3_2 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '3%' AND jilid = '2'"));
-                    $kelas4_2 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '4%' AND jilid = '2'"));
-                    $kelas5_2 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '5%' AND jilid = '2'"));
-                    $kelas6_2 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '6%' AND jilid = '2'"));
-
-                    //Total jilid 3
-                    $kelas1_3 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '1%' AND jilid = '3'"));
-                    $kelas2_3 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '2%' AND jilid = '3'"));
-                    $kelas3_3 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '3%' AND jilid = '3'"));
-                    $kelas4_3 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '4%' AND jilid = '3'"));
-                    $kelas5_3 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '5%' AND jilid = '3'"));
-                    $kelas6_3 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '6%' AND jilid = '3'"));
-
-                    //Total jilid 4
-                    $kelas1_4 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '1%' AND jilid = '4'"));
-                    $kelas2_4 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '2%' AND jilid = '4'"));
-                    $kelas3_4 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '3%' AND jilid = '4'"));
-                    $kelas4_4 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '4%' AND jilid = '4'"));
-                    $kelas5_4 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '5%' AND jilid = '4'"));
-                    $kelas6_4 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '6%' AND jilid = '4'"));
-
-                    //Total jilid 5
-                    $kelas1_5 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '1%' AND jilid = '5'"));
-                    $kelas2_5 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '2%' AND jilid = '5'"));
-                    $kelas3_5 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '3%' AND jilid = '5'"));
-                    $kelas4_5 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '4%' AND jilid = '5'"));
-                    $kelas5_5 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '5%' AND jilid = '5'"));
-                    $kelas6_5 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '6%' AND jilid = '5'"));
-
-                    //Total jilid 6
-                    $kelas1_6 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '1%' AND jilid = '6'"));
-                    $kelas2_6 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '2%' AND jilid = '6'"));
-                    $kelas3_6 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '3%' AND jilid = '6'"));
-                    $kelas4_6 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '4%' AND jilid = '6'"));
-                    $kelas5_6 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '5%' AND jilid = '6'"));
-                    $kelas6_6 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '6%' AND jilid = '6'"));
-
-                    //Total Al Quran
-                    $kelas1_alquran = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '1%' AND jilid = 'Al Quran'"));
-                    $kelas2_alquran = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '2%' AND jilid = 'Al Quran'"));
-                    $kelas3_alquran = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '3%' AND jilid = 'Al Quran'"));
-                    $kelas4_alquran = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '4%' AND jilid = 'Al Quran'"));
-                    $kelas5_alquran = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '5%' AND jilid = 'Al Quran'"));
-                    $kelas6_alquran = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '6%' AND jilid = 'Al Quran'"));
-
-                    //Total Ghorib
-                    $kelas1_ghorib = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '1%' AND jilid = 'Ghorib'"));
-                    $kelas2_ghorib = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '2%' AND jilid = 'Ghorib'"));
-                    $kelas3_ghorib = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '3%' AND jilid = 'Ghorib'"));
-                    $kelas4_ghorib = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '4%' AND jilid = 'Ghorib'"));
-                    $kelas5_ghorib = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '5%' AND jilid = 'Ghorib'"));
-                    $kelas6_ghorib = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '6%' AND jilid = 'Ghorib'"));
-
-                    //Total Tajwid
-                    $kelas1_tajwid = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '1%' AND jilid = 'Tajwid'"));
-                    $kelas2_tajwid = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '2%' AND jilid = 'Tajwid'"));
-                    $kelas3_tajwid = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '3%' AND jilid = 'Tajwid'"));
-                    $kelas4_tajwid = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '4%' AND jilid = 'Tajwid'"));
-                    $kelas5_tajwid = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '5%' AND jilid = 'Tajwid'"));
-                    $kelas6_tajwid = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '6%' AND jilid = 'Tajwid'"));
-
-                    //Total Tahfizh
-                    $kelas1_tahfizh = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '1%' AND jilid = 'Tahfizh'"));
-                    $kelas2_tahfizh = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '2%' AND jilid = 'Tahfizh'"));
-                    $kelas3_tahfizh = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '3%' AND jilid = 'Tahfizh'"));
-                    $kelas4_tahfizh = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '4%' AND jilid = 'Tahfizh'"));
-                    $kelas5_tahfizh = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '5%' AND jilid = 'Tahfizh'"));
-                    $kelas6_tahfizh = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '6%' AND jilid = 'Tahfizh'"));
-
-                    //Total Turjuman
-                    $kelas1_turjuman = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '1%' AND jilid = 'Turjuman'"));
-                    $kelas2_turjuman = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '2%' AND jilid = 'Turjuman'"));
-                    $kelas3_turjuman = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '3%' AND jilid = 'Turjuman'"));
-                    $kelas4_turjuman = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '4%' AND jilid = 'Turjuman'"));
-                    $kelas5_turjuman = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '5%' AND jilid = 'Turjuman'"));
-                    $kelas6_turjuman = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '6%' AND jilid = 'Turjuman'"));
-
-                    //Total KBQ
-                    $kelas1_kbq = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '1%' AND jilid = 'KBQ'"));
-                    $kelas2_kbq = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '2%' AND jilid = 'KBQ'"));
-                    $kelas3_kbq = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '3%' AND jilid = 'KBQ'"));
-                    $kelas4_kbq = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '4%' AND jilid = 'KBQ'"));
-                    $kelas5_kbq = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '5%' AND jilid = 'KBQ'"));
-                    $kelas6_kbq = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '6%' AND jilid = 'KBQ'"));
-                    ?>
-
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="card flex-fill w-100">
@@ -319,8 +197,36 @@ $tahun = date("Y");
 
                                 <div class="card-body" style="margin-top: -10px; margin-bottom: 10px;">
 
+                                    <?php
+                                    // Mendapatkan tanggal saat ini
+                                    $tanggal = date("d");
+                                    // Mendapatkan nomor bulan saat ini
+                                    $bulan = date("n"); // "n" memberikan angka bulan tanpa leading zero
+                                    // Mendapatkan tahun saat ini
+                                    $tahun = date("Y");
+
+                                    // Array nama bulan dalam bahasa Indonesia
+                                    $nama_bulan = array(
+                                        1 => "Januari",
+                                        2 => "Februari",
+                                        3 => "Maret",
+                                        4 => "April",
+                                        5 => "Mei",
+                                        6 => "Juni",
+                                        7 => "Juli",
+                                        8 => "Agustus",
+                                        9 => "September",
+                                        10 => "Oktober",
+                                        11 => "November",
+                                        12 => "Desember"
+                                    );
+
+                                    // Mendapatkan nama bulan dalam bahasa Indonesia
+                                    $nama_bulan_indonesia = $nama_bulan[$bulan];
+                                    ?>
+
                                     <select class="form-select mb-3" aria-label="Default select example" id='bulan-pilih'>
-                                        <option value="">Pilih Bulan</option>
+                                        <option value="<?= $nama_bulan_indonesia ?>"><?= $nama_bulan_indonesia ?></option>
                                         <option value="Januari">Januari</option>
                                         <option value="Februari">Februari</option>
                                         <option value="Maret">Maret</option>
@@ -344,20 +250,8 @@ $tahun = date("Y");
                                                     <th scope="col">Nama</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <?php
-                                                $no = 1;
-                                                $sql = mysqli_query($conn, "SELECT DISTINCT kelompok.guru
-                                            FROM kelompok
-                                            INNER JOIN laporan ON kelompok.nama = laporan.nama
-                                            WHERE laporan.bulan = '$bulan'");
-                                                while ($data = mysqli_fetch_assoc($sql)) {
-                                                ?>
-                                                    <tr>
-                                                        <th scope="row"><?php echo $no++; ?></th>
-                                                        <td><?php echo $data['guru']; ?></td>
-                                                    </tr>
-                                                <?php } ?>
+                                            <tbody id="data-guru">
+                                                <!-- Data will be inserted here -->
                                             </tbody>
                                         </table>
 
@@ -384,45 +278,31 @@ $tahun = date("Y");
                                                     <th scope="col">KBQ</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <?php
-                                                for ($i = 1; $i <= 6; $i++) {
-                                                    // Dynamically creating variable names
-                                                    $kelas_siswa = ${"kelas" . $i . "_siswa"};
-                                                    $kelas_tuntas = ${"kelas" . $i . "_tuntas"};
-                                                    $kelas_belum = ${"kelas" . $i . "_belum"};
-                                                    $kelas_1 = ${"kelas" . $i . "_1"};
-                                                    $kelas_2 = ${"kelas" . $i . "_2"};
-                                                    $kelas_3 = ${"kelas" . $i . "_3"};
-                                                    $kelas_4 = ${"kelas" . $i . "_4"};
-                                                    $kelas_5 = ${"kelas" . $i . "_5"};
-                                                    $kelas_6 = ${"kelas" . $i . "_6"};
-                                                    $kelas_alquran = ${"kelas" . $i . "_alquran"};
-                                                    $kelas_ghorib = ${"kelas" . $i . "_ghorib"};
-                                                    $kelas_tajwid = ${"kelas" . $i . "_tajwid"};
-                                                    $kelas_tahfizh = ${"kelas" . $i . "_tahfizh"};
-                                                    $kelas_turjuman = ${"kelas" . $i . "_turjuman"};
-                                                    $kelas_kbq = ${"kelas" . $i . "_kbq"};
-                                                ?>
-                                                    <tr>
-                                                        <td><?= $i ?></td>
-                                                        <td><?= $kelas_siswa ?: '' ?></td>
-                                                        <td><?= $kelas_tuntas ?: '' ?></td>
-                                                        <td><?= $kelas_belum ?: '' ?></td>
-                                                        <td><?= $kelas_1 ?: '' ?></td>
-                                                        <td><?= $kelas_2 ?: '' ?></td>
-                                                        <td><?= $kelas_3 ?: '' ?></td>
-                                                        <td><?= $kelas_4 ?: '' ?></td>
-                                                        <td><?= $kelas_5 ?: '' ?></td>
-                                                        <td><?= $kelas_6 ?: '' ?></td>
-                                                        <td><?= $kelas_alquran ?: '' ?></td>
-                                                        <td><?= $kelas_ghorib ?: '' ?></td>
-                                                        <td><?= $kelas_tajwid ?: '' ?></td>
-                                                        <td><?= $kelas_tahfizh ?: '' ?></td>
-                                                        <td><?= $kelas_turjuman ?: '' ?></td>
-                                                        <td><?= $kelas_kbq ?: '' ?></td>
-                                                    </tr>
-                                                <?php } ?>
+                                            <tbody id="data-jilid">
+
+                                            </tbody>
+                                        </table>
+
+                                        <p>Perkembangan Juz Setiap Kelas</p>
+
+                                        <table class="table table-striped table-hover table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Kelas</th>
+                                                    <th scope="col">Total Siswa</th>
+                                                    <th scope="col">Tuntas</th>
+                                                    <th scope="col">Belum Tuntas</th>
+                                                    <th scope="col">Juz 30</th>
+                                                    <th scope="col">Juz 29</th>
+                                                    <th scope="col">Juz 28</th>
+                                                    <th scope="col">Juz 1</th>
+                                                    <th scope="col">Juz 2</th>
+                                                    <th scope="col">Juz 3</th>
+                                                    <th scope="col">Juz Lainnya</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="data-juz">
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -430,27 +310,6 @@ $tahun = date("Y");
                             </div>
                         </div>
                     </div>
-
-
-
-                    <div class="row" style="margin-top: -10px;">
-                        <div class="col-xl-12">
-                            <div class="card flex-fill w-100">
-                                <div class="card-header d-flex">
-                                    <h5 class="card-title mb-0" style="font-size: 16px;">Laporan Perkembangan Kelas</h5>
-                                </div>
-
-                                <div class="card-body">
-                                    <div class="overflow-scroll">
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
                 </div>
             </main>
 
@@ -475,7 +334,63 @@ $tahun = date("Y");
 
     <script src="../dist/js/app.js"></script>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var bulanPilih = document.getElementById('bulan-pilih');
 
+            // Trigger change event to load data for the selected month
+            bulanPilih.dispatchEvent(new Event('change'));
+        });
+
+        document.getElementById('bulan-pilih').addEventListener('change', function() {
+            var selectedMonth = this.value;
+
+            // Function to send AJAX request for getLaporanGuru.php
+            function fetchLaporanGuru() {
+                var xhrLaporanGuru = new XMLHttpRequest();
+                xhrLaporanGuru.open('POST', 'getLaporanGuru.php', true);
+                xhrLaporanGuru.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhrLaporanGuru.onreadystatechange = function() {
+                    if (xhrLaporanGuru.readyState == 4 && xhrLaporanGuru.status == 200) {
+                        document.getElementById('data-guru').innerHTML = xhrLaporanGuru.responseText;
+                    }
+                };
+                xhrLaporanGuru.send('bulan=' + selectedMonth);
+            }
+
+            // Function to send AJAX request for getDataJilid.php
+            function fetchDataJilid() {
+                var xhrDataJilid = new XMLHttpRequest();
+                xhrDataJilid.open('POST', 'getDataJilid.php', true);
+                xhrDataJilid.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhrDataJilid.onreadystatechange = function() {
+                    if (xhrDataJilid.readyState == 4 && xhrDataJilid.status == 200) {
+                        document.getElementById('data-jilid').innerHTML = xhrDataJilid.responseText;
+                    }
+                };
+                xhrDataJilid.send('bulan=' + selectedMonth);
+            }
+
+            // Function to send AJAX request for getDataJuz.php
+
+            function fetchDataJuz() {
+                var xhrDataJuz = new XMLHttpRequest();
+                xhrDataJuz.open('POST', 'getDataJuz.php', true);
+                xhrDataJuz.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhrDataJuz.onreadystatechange = function() {
+                    if (xhrDataJuz.readyState == 4 && xhrDataJuz.status == 200) {
+                        document.getElementById('data-juz').innerHTML = xhrDataJuz.responseText;
+                    }
+                };
+                xhrDataJuz.send('bulan=' + selectedMonth);
+            }
+
+            // Call both functions
+            fetchLaporanGuru();
+            fetchDataJilid();
+            fetchDataJuz();
+        });
+    </script>
 </body>
 
 </html>

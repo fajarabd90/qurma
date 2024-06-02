@@ -60,54 +60,12 @@ $lembaga = $user['lembaga'];
                             <div class="card flex-fill w-100">
                                 <div class="card-header d-flex">
                                     <h5 class="card-title mb-0" style="font-size: 16px;">Data Masuk</h5>
-                                    <div class="ms-auto d-flex align-items-center">
-                                        <button type="button" class="btn btn-primary btn-sm rounded-pill" style="margin-right: 5px;" data-bs-toggle="modal" data-bs-target="#addData">
-                                            <i data-feather="edit"></i> Catat Laporan
-                                        </button>
-                                    </div>
                                 </div>
 
                                 <?php
                                 $teachersQuery = mysqli_query($conn, "SELECT nama FROM guru WHERE lembaga = '$lembaga' ORDER BY nama ASC");
                                 $teachers = mysqli_fetch_all($teachersQuery, MYSQLI_ASSOC);
                                 ?>
-
-                                <!-- Modal tambah-->
-                                <div class="modal fade" id="addData" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-xl">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="fas fa-edit"></i> Catat Laporan</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-
-                                                <div class="card-body">
-                                                    <!-- Add the filter form -->
-                                                    <div class="row g-3">
-                                                        <div class="col">
-                                                            <form id="filterForm">
-                                                                <select class="form-select" aria-label="Default select example" name="kelasFilter" id="kelasFilter">
-                                                                    <option value="">Pilih Kelas</option>
-                                                                    <option value="1">1</option>
-                                                                    <option value="2">2</option>
-                                                                    <option value="3">3</option>
-                                                                    <option value="4">4</option>
-                                                                    <option value="5">5</option>
-                                                                    <option value="6">6</option>
-                                                                </select>
-                                                            </form>
-                                                        </div>
-                                                        <div id="filteredResults" class="mt-2">
-                                                            <!-- Display the filtered results here -->
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Akhir modal tambah -->
 
                                 <div class="card-body" style="margin-top: -20px;">
                                     <p>Silahkan pilih Filter di bawah ini:</p>
@@ -210,35 +168,6 @@ $lembaga = $user['lembaga'];
     </script>
 
     <script>
-        $(document).ready(function() {
-            // Add event listener for teacherFilter change
-            $('#kelasFilter').change(function() {
-                // Get the selected values from both filters
-                var selectedKelas = $('#kelasFilter').val();
-
-                // Call loadData with the selected values
-                loadData(selectedKelas);
-            });
-
-            // Initial load of data without specific filters
-            loadData();
-
-            function loadData(selectedKelas) {
-                $.ajax({
-                    type: 'POST',
-                    url: 'formData.php',
-                    data: {
-                        kelasFilter: selectedKelas
-                    },
-                    success: function(response) {
-                        $('#filteredResults').html(response);
-                    }
-                });
-            }
-        });
-    </script>
-
-    <script>
         var currentSearchTerm = ''; // Variable to store the current search term
 
         $(document).ready(function() {
@@ -299,6 +228,7 @@ $lembaga = $user['lembaga'];
                 var juz = $(event.relatedTarget).closest("tr").find("td:eq(9)").text();
                 var surat = $(event.relatedTarget).closest("tr").find("td:eq(10)").text();
                 var ketuntasan_tahfizh = $(event.relatedTarget).closest("tr").find("td:eq(11)").text();
+                var catatan = $(event.relatedTarget).closest("tr").find("td:eq(12)").text();
 
                 $(this).find('#modal-edit').html($(
                     `
@@ -370,6 +300,11 @@ $lembaga = $user['lembaga'];
                             <option value="Belum Tuntas">Belum Tuntas</option>
                         </select>
                         <label for="ketuntasan_tahfizh">Ketuntasan Tahfizh</label>
+                    </div>
+
+                    <div class="form-floating mb-2">
+                        <textarea class="form-control" name="catatan" id="catatan" style="height: 120px">${catatan}</textarea>
+                        <label for="catatan">Catatan</label>
                     </div>
 
                     <div class="modal-footer">

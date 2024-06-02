@@ -61,7 +61,6 @@ $lembaga = $user['lembaga'];
                                 <div class="card-header d-flex">
                                     <h5 class="card-title mb-0" style="font-size: 16px;">Daftar Hasil</h5>
                                     <div class="ms-auto d-flex align-items-center">
-                                        <button class="btn btn-success btn-sm rounded-pill" style="margin-right: 5px;" data-bs-toggle="modal" data-bs-target="#form"><i class="fas fa-print"></i> Print Form</button>
                                         <button type="button" class="btn btn-primary btn-sm rounded-pill" style="margin-right: 5px;" data-bs-toggle="modal" data-bs-target="#addMassal">
                                             <i data-feather="edit"></i> Catat Hasil
                                         </button>
@@ -72,34 +71,6 @@ $lembaga = $user['lembaga'];
                                 <div class="card-body py-3">
                                     <input style="margin-top: -20px;" class="form-control me-2 mb-2" type="text" id="searchInput" placeholder="Cari nama siswa..." aria-label="Search">
                                     <div id="mainContent"></div>
-
-                                    <div class="modal fade" id="form" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-lg">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="fas fa-print"></i> Cetak Form Placement Tes</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <center>
-                                                        <div class="card">
-                                                            <div class="card-header">
-                                                                Pilih kelas yang ingin dicetak...
-                                                            </div>
-                                                            <div class="card-body">
-                                                                <button onclick="printKelas1()" class="btn btn-primary mb-2">Kelas 1</button>
-                                                                <button onclick="printKelas2()" class="btn btn-primary mb-2">Kelas 2</button>
-                                                                <button onclick="printKelas3()" class="btn btn-primary mb-2">Kelas 3</button>
-                                                                <button onclick="printKelas4()" class="btn btn-primary mb-2">Kelas 4</button>
-                                                                <button onclick="printKelas5()" class="btn btn-primary mb-2">Kelas 5</button>
-                                                                <button onclick="printKelas6()" class="btn btn-primary mb-2">Kelas 6</button>
-                                                            </div>
-                                                        </div>
-                                                    </center>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                     <!-- Modal Massal-->
                                     <div class="modal fade" id="addMassal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -172,134 +143,6 @@ $lembaga = $user['lembaga'];
     </div>
 
     <script src="../../dist/js/app.js"></script>
-
-    <script>
-        function printKelas1() {
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-
-            document.body.appendChild(iframe);
-
-            fetch('form-kelas1.php')
-                .then(response => response.text())
-                .then(htmlContent => {
-                    iframe.contentDocument.write(htmlContent);
-                    iframe.contentDocument.close();
-
-                    // Wait for content to load (adjust the delay as needed)
-                    setTimeout(() => {
-                        iframe.contentWindow.print();
-                        document.body.removeChild(iframe);
-                    }, 1000);
-                })
-                .catch(error => console.error('Error fetching content:', error));
-        }
-
-        function printKelas2() {
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-
-            document.body.appendChild(iframe);
-
-            fetch('form-kelas2.php')
-                .then(response => response.text())
-                .then(htmlContent => {
-                    iframe.contentDocument.write(htmlContent);
-                    iframe.contentDocument.close();
-
-                    // Wait for content to load (adjust the delay as needed)
-                    setTimeout(() => {
-                        iframe.contentWindow.print();
-                        document.body.removeChild(iframe);
-                    }, 1000);
-                })
-                .catch(error => console.error('Error fetching content:', error));
-        }
-
-        function printKelas3() {
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-
-            document.body.appendChild(iframe);
-
-            fetch('form-kelas3.php')
-                .then(response => response.text())
-                .then(htmlContent => {
-                    iframe.contentDocument.write(htmlContent);
-                    iframe.contentDocument.close();
-
-                    // Wait for content to load (adjust the delay as needed)
-                    setTimeout(() => {
-                        iframe.contentWindow.print();
-                        document.body.removeChild(iframe);
-                    }, 1000);
-                })
-                .catch(error => console.error('Error fetching content:', error));
-        }
-
-        function printKelas4() {
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-
-            document.body.appendChild(iframe);
-
-            fetch('form-kelas4.php')
-                .then(response => response.text())
-                .then(htmlContent => {
-                    iframe.contentDocument.write(htmlContent);
-                    iframe.contentDocument.close();
-
-                    // Wait for content to load (adjust the delay as needed)
-                    setTimeout(() => {
-                        iframe.contentWindow.print();
-                        document.body.removeChild(iframe);
-                    }, 1000);
-                })
-                .catch(error => console.error('Error fetching content:', error));
-        }
-
-        function printKelas5() {
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-
-            document.body.appendChild(iframe);
-
-            fetch('form-kelas5.php')
-                .then(response => response.text())
-                .then(htmlContent => {
-                    iframe.contentDocument.write(htmlContent);
-                    iframe.contentDocument.close();
-
-                    // Wait for content to load (adjust the delay as needed)
-                    setTimeout(() => {
-                        iframe.contentWindow.print();
-                        document.body.removeChild(iframe);
-                    }, 1000);
-                })
-                .catch(error => console.error('Error fetching content:', error));
-        }
-
-        function printKelas6() {
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-
-            document.body.appendChild(iframe);
-
-            fetch('form-kelas6.php')
-                .then(response => response.text())
-                .then(htmlContent => {
-                    iframe.contentDocument.write(htmlContent);
-                    iframe.contentDocument.close();
-
-                    // Wait for content to load (adjust the delay as needed)
-                    setTimeout(() => {
-                        iframe.contentWindow.print();
-                        document.body.removeChild(iframe);
-                    }, 1000);
-                })
-                .catch(error => console.error('Error fetching content:', error));
-        }
-    </script>
 
     <script>
         $(document).ready(function() {

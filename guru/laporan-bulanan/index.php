@@ -253,6 +253,7 @@ $lembaga = $user['lembaga'];
                 var juz = $(event.relatedTarget).closest("tr").find("td:eq(9)").text();
                 var surat = $(event.relatedTarget).closest("tr").find("td:eq(10)").text();
                 var ketuntasan_tahfizh = $(event.relatedTarget).closest("tr").find("td:eq(11)").text();
+                var catatan = $(event.relatedTarget).closest("tr").find("td:eq(12)").text();
 
                 $(this).find('#modal-edit').html($(
                     `
@@ -324,6 +325,11 @@ $lembaga = $user['lembaga'];
                             <option value="Belum Tuntas">Belum Tuntas</option>
                         </select>
                         <label for="ketuntasan_tahfizh">Ketuntasan Tahfizh</label>
+                    </div>
+
+                    <div class="form-floating mb-2">
+                        <textarea class="form-control" name="catatan" id="catatan" style="height: 120px">${catatan}</textarea>
+                        <label for="catatan">Catatan</label>
                     </div>
 
                     <div class="modal-footer">

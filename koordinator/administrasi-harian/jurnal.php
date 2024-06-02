@@ -16,6 +16,28 @@ $tahun_ajaran = $conn_pdo->prepare("SELECT * FROM `tahun_ajaran`");
 $tahun_ajaran->execute();
 $tahun_ajaran = $tahun_ajaran->fetch(PDO::FETCH_ASSOC);
 
+date_default_timezone_set('Asia/Jakarta'); // Atur zona waktu menjadi Waktu Indonesia Barat (WIB)
+
+function tentukan_semester($bulan)
+{
+    if ($bulan >= 1 && $bulan <= 6) { // Januari sampai Juni
+        return "Genap";
+    } elseif ($bulan >= 7 && $bulan <= 12) { // Juli sampai Desember
+        return "Ganjil";
+    } else {
+        return "Bulan tidak valid";
+    }
+}
+
+$bulan_sekarang = intval(date('n')); // Ambil nomor bulan saat ini
+
+// Mendapatkan tanggal saat ini
+$tanggal = date("d");
+// Mendapatkan nama bulan saat ini
+$bulan = date("F");
+// Mendapatkan tahun saat ini
+$tahun = date("Y");
+
 $sql = mysqli_query($conn, "SELECT * FROM siswa WHERE lembaga = '$lembaga' ORDER BY kelas, nama ASC");
 ?>
 
@@ -29,31 +51,21 @@ $sql = mysqli_query($conn, "SELECT * FROM siswa WHERE lembaga = '$lembaga' ORDER
     <link rel="shortcut icon" href="../../assets/img/logo.png" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            width: 100%;
-            /* Lebar container penuh */
-            max-width: 330mm;
-            /* Lebar maksimum */
-            height: 100vh;
-            /* Tinggi container penuh */
-            justify-content: center;
-            /* Memusatkan horizontal */
-            align-items: center;
-            /* Memusatkan vertikal */
-            padding: 10px;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
+        .title {
+            text-align: center;
             font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            margin-top: 20px;
+            /* Added margin to push the title down */
+            text-transform: uppercase;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-bottom: 20px;
+
         }
 
         table.no-margin {
@@ -71,14 +83,6 @@ $sql = mysqli_query($conn, "SELECT * FROM siswa WHERE lembaga = '$lembaga' ORDER
             border-collapse: collapse;
             text-align: center;
         }
-
-        .title {
-            text-align: center;
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
     </style>
 </head>
 
@@ -87,14 +91,14 @@ $sql = mysqli_query($conn, "SELECT * FROM siswa WHERE lembaga = '$lembaga' ORDER
 
         <div class="title">JURNAL HARIAN PENGAJARAN METODE UMMI <br> <?= $lembaga; ?> <br> TAHUN AJARAN <?= $tahun_ajaran['tahun_ajaran']; ?></div>
 
-        <table style="margin-bottom: 20px">
+        <table>
             <thead>
                 <tr>
                     <td></td>
-                    <td colspan="3">Kelas : ....</td>
-                    <td colspan="3">Bulan : ....</td>
-                    <td colspan="3">Jilid : ....</td>
-                    <td colspan="3">Tempat : ....</td>
+                    <td colspan="4">Kelas : ....</td>
+                    <td colspan="4">Bulan : ....</td>
+                    <td colspan="4">Jilid : ....</td>
+                    <td colspan="4">Tempat : ....</td>
                 </tr>
                 <tr class="custom-border">
                     <th scope="col" rowspan="2">TM</th>
@@ -102,7 +106,8 @@ $sql = mysqli_query($conn, "SELECT * FROM siswa WHERE lembaga = '$lembaga' ORDER
                     <th scope="col" rowspan="2">Muroja'ah</th>
                     <th scope="col" colspan="2">Hafalan</th>
                     <th scope="col" colspan="3">UMMI/Al Quran</th>
-                    <th scope="col" colspan="2">Ghorib/Tajwid</th>
+                    <th scope="col" colspan="2">Ghorib</th>
+                    <th scope="col" colspan="2">Tajwid</th>
                     <th scope="col" colspan="2">Turjuman/KBQ</th>
                     <th scope="col" rowspan="2">Paraf</th>
                 </tr>
@@ -112,6 +117,8 @@ $sql = mysqli_query($conn, "SELECT * FROM siswa WHERE lembaga = '$lembaga' ORDER
                     <th scope="col">Jilid/Surat</th>
                     <th scope="col">Hal/Ayat</th>
                     <th scope="col">Juz</th>
+                    <th scope="col">Hal</th>
+                    <th scope="col">Materi</th>
                     <th scope="col">Hal</th>
                     <th scope="col">Materi</th>
                     <th scope="col">Hal</th>
@@ -134,13 +141,15 @@ $sql = mysqli_query($conn, "SELECT * FROM siswa WHERE lembaga = '$lembaga' ORDER
                         <td></td>
                         <td></td>
                         <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                 <?php } ?>
             </tbody>
         </table>
 
         <center>
-            <table class="no-margin">
+            <table class="no-margin" style="margin-bottom: 400px;">
                 <tr>
                     <td align="center">Koordinator Al Quran</td>
                     <td></td>

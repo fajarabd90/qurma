@@ -15,6 +15,30 @@ $lembaga = $user['lembaga'];
 $tahun_ajaran = $conn_pdo->prepare("SELECT * FROM `tahun_ajaran`");
 $tahun_ajaran->execute();
 $tahun_ajaran = $tahun_ajaran->fetch(PDO::FETCH_ASSOC);
+
+date_default_timezone_set('Asia/Jakarta'); // Atur zona waktu menjadi Waktu Indonesia Barat (WIB)
+
+function tentukan_semester($bulan)
+{
+    if ($bulan >= 1 && $bulan <= 6) { // Januari sampai Juni
+        return "Genap";
+    } elseif ($bulan >= 7 && $bulan <= 12) { // Juli sampai Desember
+        return "Ganjil";
+    } else {
+        return "Bulan tidak valid";
+    }
+}
+
+$bulan_sekarang = intval(date('n')); // Ambil nomor bulan saat ini
+
+// Mendapatkan tanggal saat ini
+$tanggal = date("d");
+// Mendapatkan nama bulan saat ini
+$bulan = date("F");
+// Mendapatkan tahun saat ini
+$tahun = date("Y");
+
+$sql = mysqli_query($conn, "SELECT * FROM siswa WHERE lembaga = '$lembaga' ORDER BY kelas, nama ASC");
 ?>
 
 <!DOCTYPE html>
@@ -94,8 +118,8 @@ $tahun_ajaran = $tahun_ajaran->fetch(PDO::FETCH_ASSOC);
             <table class="no-margin">
                 <tr>
                     <td>T.A. : <?= $tahun_ajaran['tahun_ajaran']; ?></td>
-                    <td style="text-align: center;">Semester : ....</td>
-                    <td style="text-align: end;">Bulan : ....</td>
+                    <td style="text-align: center;">Semester : <?php echo tentukan_semester($bulan_sekarang); ?></td>
+                    <td style="text-align: end;">Bulan : <?= $bulan ?></td>
                 </tr>
             </table>
 
@@ -124,7 +148,7 @@ $tahun_ajaran = $tahun_ajaran->fetch(PDO::FETCH_ASSOC);
                     <td></td>
                 </tr>
                 <tr class="custom-border">
-                    <th style="width: 352px; text-align: left;">Peraga/Surat & Ayat</th>
+                    <th style="width: 352px; text-align: left;">Peraga/Surat & Ayat/3 Skill/Intisari/KBQ</th>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -155,7 +179,7 @@ $tahun_ajaran = $tahun_ajaran->fetch(PDO::FETCH_ASSOC);
                         <th style="width: 15px;">Kls</th>
                         <th style="width: 240px;">Nama Siswa</th>
                         <th style="width: 80px;">Jilid</th>
-                        <th colspan="25">Halaman/Nilai untuk Jilid (Nilai saja untuk Al Quran)</th>
+                        <th colspan="25">Halaman/Nilai untuk Jilid (Nilai saja untuk Al Quran, Turjuman, KBQ)</th>
                     </tr>
                 </thead>
                 <tbody>

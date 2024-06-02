@@ -16,6 +16,28 @@ $tahun_ajaran = $conn_pdo->prepare("SELECT * FROM `tahun_ajaran`");
 $tahun_ajaran->execute();
 $tahun_ajaran = $tahun_ajaran->fetch(PDO::FETCH_ASSOC);
 
+date_default_timezone_set('Asia/Jakarta'); // Atur zona waktu menjadi Waktu Indonesia Barat (WIB)
+
+function tentukan_semester($bulan)
+{
+    if ($bulan >= 1 && $bulan <= 6) { // Januari sampai Juni
+        return "Genap";
+    } elseif ($bulan >= 7 && $bulan <= 12) { // Juli sampai Desember
+        return "Ganjil";
+    } else {
+        return "Bulan tidak valid";
+    }
+}
+
+$bulan_sekarang = intval(date('n')); // Ambil nomor bulan saat ini
+
+// Mendapatkan tanggal saat ini
+$tanggal = date("d");
+// Mendapatkan nama bulan saat ini
+$bulan = date("F");
+// Mendapatkan tahun saat ini
+$tahun = date("Y");
+
 $sql = mysqli_query($conn, "SELECT * FROM siswa WHERE lembaga = '$lembaga' ORDER BY kelas, nama ASC");
 ?>
 
@@ -96,8 +118,8 @@ $sql = mysqli_query($conn, "SELECT * FROM siswa WHERE lembaga = '$lembaga' ORDER
             <table class="no-margin">
                 <tr>
                     <td>T.A. : <?= $tahun_ajaran['tahun_ajaran']; ?></td>
-                    <td style="text-align: center;">Semester : ....</td>
-                    <td style="text-align: center;">Bulan : ....</td>
+                    <td style="text-align: center;">Semester : <?php echo tentukan_semester($bulan_sekarang); ?></td>
+                    <td style="text-align: center;">Bulan : <?= $bulan ?></td>
                     <td style="text-align: end;">Jilid : ..............</td>
                 </tr>
             </table>
@@ -188,11 +210,14 @@ $sql = mysqli_query($conn, "SELECT * FROM siswa WHERE lembaga = '$lembaga' ORDER
             </table>
 
             <center>
-                <table class="no-margin">
+                <table class="no-margin" style="margin-bottom: 400px;">
                     <tr>
                         <td align="center">Koordinator Al Quran</td>
                         <td></td>
                         <td align="center">Guru</td>
+                    </tr>
+                    <tr style="visibility: hidden;">
+                        <td>Oke</td>
                     </tr>
                     <tr style="visibility: hidden;">
                         <td>Oke</td>
