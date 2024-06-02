@@ -318,22 +318,24 @@ $tahun = date("Y");
                                 </div>
 
                                 <div class="card-body" style="margin-top: -10px; margin-bottom: 10px;">
+
+                                    <select class="form-select mb-3" aria-label="Default select example" id='bulan-pilih'>
+                                        <option value="">Pilih Bulan</option>
+                                        <option value="Januari">Januari</option>
+                                        <option value="Februari">Februari</option>
+                                        <option value="Maret">Maret</option>
+                                        <option value="April">April</option>
+                                        <option value="Mei">Mei</option>
+                                        <option value="Juni">Juni</option>
+                                        <option value="Juli">Juli</option>
+                                        <option value="Agustus">Agustus</option>
+                                        <option value="September">September</option>
+                                        <option value="Oktober">Oktober</option>
+                                        <option value="November">November</option>
+                                        <option value="Desember">Desember</option>
+                                    </select>
+
                                     <div class="overflow-scroll">
-                                        <select class="form-select mb-2" aria-label="Default select example" id='bulan-pilih'>
-                                            <option value="">Pilih Bulan</option>
-                                            <option value="Januari">Januari</option>
-                                            <option value="Februari">Februari</option>
-                                            <option value="Maret">Maret</option>
-                                            <option value="April">April</option>
-                                            <option value="Mei">Mei</option>
-                                            <option value="Juni">Juni</option>
-                                            <option value="Juli">Juli</option>
-                                            <option value="Agustus">Agustus</option>
-                                            <option value="September">September</option>
-                                            <option value="Oktober">Oktober</option>
-                                            <option value="November">November</option>
-                                            <option value="Desember">Desember</option>
-                                        </select>
                                         <p>Guru Yang Sudah Input Laporan Bulanan</p>
                                         <table class="table table-striped table-hover table-bordered">
                                             <thead>
