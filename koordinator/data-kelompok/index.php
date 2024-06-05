@@ -61,7 +61,7 @@ $lembaga = $user['lembaga'];
                                 <div class="card-header d-flex">
                                     <h5 class="card-title mb-0" style="font-size: 16px;">Data Kelompok</h5>
                                     <div class="ms-auto d-flex align-items-center">
-                                        <button type="button" class="btn btn-primary rounded-pill btn-sm" data-bs-toggle="modal" data-bs-target="#addData" style="margin-right: 5px;"><i class="fas fa-edit me-1"></i>Tambah</button>
+                                        <button type="button" class="btn btn-success rounded-pill btn-sm" data-bs-toggle="modal" data-bs-target="#addData" style="margin-right: 5px;"><i class="fas fa-edit me-1"></i>Tambah</button>
                                         <button type="button" class="btn btn-primary btn-sm rounded-pill" style="margin-right: 5px;" data-bs-toggle="modal" data-bs-target="#addMassal">
                                             <i data-feather="users"></i> Atur Kelompok
                                         </button>

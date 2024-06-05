@@ -71,6 +71,18 @@ $tahun = date("Y");
                         </a>
                     </li>
 
+                    <li class="sidebar-item" style="margin-top: -10px;">
+                        <a class="sidebar-link" href="data-guru/index.php">
+                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">Data Guru</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item" style="margin-top: -10px;">
+                        <a class="sidebar-link" href="data-siswa/index.php">
+                            <i class="align-middle" data-feather="users"></i> <span class="align-middle">Data Siswa</span>
+                        </a>
+                    </li>
+
                     <li class="sidebar-header" style="margin-top: -20px;">
                         Administrasi & Laporan
                     </li>
@@ -178,15 +190,19 @@ $tahun = date("Y");
                     $tesTahfizh = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM tes INNER JOIN siswa ON tes.nama = siswa.nama WHERE lembaga = '$lembaga' AND keterangan = '' AND kategori = 'Tahfizh'"));
                     ?>
 
-                    <div class="alert alert-danger d-flex justify-content-between align-items-center p-2" role="alert">
-                        <span class="me-auto">Ada <?= $tesJilid ?> siswa belum Tes Jilid!</span>
-                        <a href="tes-jilid/index.php" class="btn btn-link p-0">Lihat</a>
-                    </div>
+                    <?php if ($tesJilid > 0) : ?>
+                        <div class="alert alert-danger d-flex justify-content-between align-items-center p-2" role="alert">
+                            <span class="me-auto">Ada <?= $tesJilid ?> siswa belum Tes Jilid!</span>
+                            <a href="tes-jilid/index.php" class="btn btn-link p-0">Lihat</a>
+                        </div>
+                    <?php endif; ?>
 
-                    <div class="alert alert-danger d-flex justify-content-between align-items-center p-2" role="alert">
-                        <span class="me-auto">Ada <?= $tesTahfizh ?> siswa belum Tes Tahfizh!</span>
-                        <a href="tes-tahfizh/index.php" class="btn btn-link p-0">Lihat</a>
-                    </div>
+                    <?php if ($tesTahfizh > 0) : ?>
+                        <div class="alert alert-danger d-flex justify-content-between align-items-center p-2" role="alert">
+                            <span class="me-auto">Ada <?= $tesTahfizh ?> siswa belum Tes Tahfizh!</span>
+                            <a href="tes-tahfizh/index.php" class="btn btn-link p-0">Lihat</a>
+                        </div>
+                    <?php endif; ?>
 
                     <div class="row">
                         <div class="col-xl-12">
@@ -243,17 +259,8 @@ $tahun = date("Y");
 
                                     <div class="overflow-scroll">
                                         <p>Guru Yang Sudah Input Laporan Bulanan</p>
-                                        <table class="table table-striped table-hover table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">NO</th>
-                                                    <th scope="col">Nama</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="data-guru">
-                                                <!-- Data will be inserted here -->
-                                            </tbody>
-                                        </table>
+
+                                        <div id="data-guru"></div>
 
                                         <p>Perkembangan Jilid Setiap Kelas</p>
 

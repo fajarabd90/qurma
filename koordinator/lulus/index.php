@@ -78,7 +78,7 @@ $lembaga = $user['lembaga'];
                                         <button type="button" class="btn btn-primary btn-sm rounded-pill" style="margin-right: 5px;" data-bs-toggle="modal" data-bs-target="#addData">
                                             <i data-feather="edit"></i> Catat Lulus
                                         </button>
-                                        <a class="btn btn-success btn-sm rounded-pill dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-right: 5px;">Menu</i></a>
+                                        <a class="btn btn-success btn-sm rounded-pill dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-right: 5px;">Lainnya</i></a>
                                         <ul class="dropdown-menu bg-success" aria-labelledby="navbarDropdown">
                                             <li><a class="dropdown-item text-white" href="pengumuman.php" target="_blank"><i class="fas fa-print"></i> Print Pengumuman Lulus</a></li>
                                             <li><a class="dropdown-item text-white" href="../munaqosyah/index.php"><i class="fa fa-arrow-circle-left"></i> Kembali Ke Data</a></li>

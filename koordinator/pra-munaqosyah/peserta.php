@@ -11,8 +11,6 @@ $user = $conn_pdo->prepare("SELECT * FROM `user` WHERE id = ?");
 $user->execute([$id]);
 $user = $user->fetch(PDO::FETCH_ASSOC);
 $lembaga = $user['lembaga'];
-
-$sql = mysqli_query($conn, "SELECT * FROM pra_munaqosyah WHERE lembaga = '$lembaga' ORDER BY kelas, nama ASC");
 ?>
 
 <!DOCTYPE html>
@@ -95,13 +93,27 @@ $sql = mysqli_query($conn, "SELECT * FROM pra_munaqosyah WHERE lembaga = '$lemba
                 <tbody>
                     <?php
                     $no = 1;
+                    $sql = mysqli_query($conn, "SELECT pra_munaqosyah.id, pra_munaqosyah.id_tes, siswa.lembaga, tes.nama, siswa.kelas, tes.juz, pra_munaqosyah.kategori, pra_munaqosyah.catatan, pra_munaqosyah.keterangan_pra, tes.keterangan
+                    FROM tes
+                    LEFT JOIN siswa ON tes.nama = siswa.nama
+                    LEFT JOIN pra_munaqosyah ON tes.id = pra_munaqosyah.id_tes
+                    WHERE siswa.lembaga = '$lembaga'
+                    AND tes.keterangan = 'Ke Pra Munaqosyah'
+                    ORDER BY siswa.kelas, siswa.nama ASC");
                     while ($data = mysqli_fetch_assoc($sql)) {
                     ?>
                         <tr>
                             <td><?php echo $no++; ?></td>
                             <td><?php echo $data['nama']; ?></td>
                             <td><?php echo $data['kelas']; ?></td>
-                            <td><?php echo $data['kategori']; ?></td>
+                            <td><?php
+                                if (empty($data["juz"])) {
+                                    echo "Tartil";
+                                } else {
+                                    echo "Tahfizh Juz " . $data["juz"];
+                                }
+                                ?></td>
+
                         </tr>
                     <?php } ?>
                 </tbody>

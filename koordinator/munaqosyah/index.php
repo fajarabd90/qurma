@@ -172,7 +172,7 @@ if (isset($_POST['download_excel'])) {
             <main class="content">
                 <div class="container-fluid p-0">
 
-                    <h1 class="h1 mb-3" style="margin-top: -10px;">Munaqosyah</h1>
+                    <h1 class="h1 mb-3" style="margin-top: -10px;">Data Munaqosyah</h1>
 
                     <div class="row">
                         <div class="col-xl-12">
@@ -181,7 +181,13 @@ if (isset($_POST['download_excel'])) {
                                     <h5 class="card-title mb-0" style="font-size: 16px;">Data Peserta Munaqosyah</h5>
 
                                     <div class="ms-auto d-flex align-items-center">
-                                        <a class="btn btn-success btn-sm rounded-pill dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-right: 5px;">Menu</i></a>
+                                        <a href="../no-peserta/index.php"><button type="button" class="btn btn-primary btn-sm rounded-pill" style="margin-right: 5px;">
+                                                <i data-feather="edit"></i> Input Nomor & Kartu
+                                            </button></a>
+                                        <a href="../lulus/index.php"><button type="button" class="btn btn-primary btn-sm rounded-pill" style="margin-right: 5px;">
+                                                <i data-feather="edit"></i> Input Lulus
+                                            </button></a>
+                                        <a class="btn btn-success btn-sm rounded-pill dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-right: 5px;">Lainnya</i></a>
                                         <ul class="dropdown-menu bg-success" aria-labelledby="navbarDropdown">
                                             <li><a class="dropdown-item text-white" href="pengumuman.php" target="_blank"><i class="fas fa-print"></i> Print Peserta</a></li>
                                             <li>
@@ -189,8 +195,6 @@ if (isset($_POST['download_excel'])) {
                                                     <button type="submit" name="download_excel" class="dropdown-item text-white"><i class="fas fa-file-excel"></i> Download Data</button>
                                                 </form>
                                             </li>
-                                            <li><a class="dropdown-item text-white" href="../no-peserta/index.php"><i class="fas fa-edit"></i> Input Nomor & Kartu</a></li>
-                                            <li><a class="dropdown-item text-white" href="../lulus/index.php"><i class="fas fa-edit"></i> Input Lulus</a></li>
                                         </ul>
                                     </div>
                                 </div>

@@ -17,7 +17,7 @@ $selectedKategori2 = isset($_GET['kategoriFilter2']) ? $_GET['kategoriFilter2'] 
 $selectedKelas2 = isset($_GET['kelasFilter2']) ? $_GET['kelasFilter2'] : '';
 $searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
 
-$sql = mysqli_query($conn, "SELECT pra_munaqosyah.id, tes.id, siswa.lembaga, tes.nama, siswa.kelas, tes.kategori, pra_munaqosyah.catatan, pra_munaqosyah.keterangan_pra, tes.keterangan
+$sql = mysqli_query($conn, "SELECT pra_munaqosyah.id, pra_munaqosyah.id_tes, siswa.lembaga, tes.nama, siswa.kelas, pra_munaqosyah.kategori, pra_munaqosyah.catatan, pra_munaqosyah.keterangan_pra, tes.keterangan
 FROM tes
 LEFT JOIN siswa ON tes.nama = siswa.nama
 LEFT JOIN pra_munaqosyah ON tes.id = pra_munaqosyah.id_tes
@@ -74,7 +74,9 @@ ORDER BY siswa.kelas, siswa.nama ASC");
                     <td><?php echo $data['kategori']; ?></td>
                     <td><?php echo $data['catatan']; ?></td>
                     <td><?php echo $data['keterangan_pra']; ?></td>
-                    <td><?php echo "<center>$link_update</center>"; ?></td>
+                    <td><?php if (!empty($data['id'])) {
+                            echo "<center>$link_update</center>";
+                        } ?></td>
                 </tr>
             <?php } ?>
         </tbody>

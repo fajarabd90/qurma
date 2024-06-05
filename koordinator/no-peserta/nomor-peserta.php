@@ -91,9 +91,9 @@ $lembaga = $user['lembaga'];
                             <?php echo $row['kategori']; ?>
                         </p>
                     </div>
-                    <p style="margin-top: 12px; font-size: 18px;"><?= $row['lembaga']; ?></p>
-                    <p style="margin-top: 35px;"><?= $row['nomor']; ?></p>
-                    <p style="font-size: 18px; color: #088030; margin-top: 41px; display: flex; align-items: center; justify-content: center; height: 40px;">
+                    <p style="margin-top: 14px; font-size: 18px;"><?= $row['lembaga']; ?></p>
+                    <p style="margin-top: 25px;"><?= $row['nomor']; ?></p>
+                    <p style="font-size: 18px; color: #088030; margin-top: 30px; display: flex; align-items: center; justify-content: center; height: 40px;">
                         <?= ucwords(strtolower($row['nama'])); ?>
                     </p>
                 </div>

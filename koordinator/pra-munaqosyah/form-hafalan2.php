@@ -106,7 +106,10 @@ $lembaga = $user['lembaga'];
                 <tbody>
                     <?php
                     $no = 1;
-                    $sql = mysqli_query($conn, "SELECT * FROM pra_munaqosyah WHERE lembaga = '$lembaga' AND kategori = 'Tartil' ORDER BY kelas, nama ASC");
+                    $sql = mysqli_query($conn, "SELECT siswa.nama, siswa.kelas
+                    FROM siswa
+                    INNER JOIN tes ON siswa.nama = tes.nama
+                    WHERE siswa.lembaga = '$lembaga' AND tes.kategori = 'Tartil' AND tes.keterangan = 'Ke Pra Munaqosyah' ORDER BY siswa.kelas, siswa.nama ASC");
                     while ($data = mysqli_fetch_assoc($sql)) {
                     ?>
                         <tr class="custom-border">

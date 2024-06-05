@@ -38,7 +38,6 @@ ORDER BY siswa.kelas, laporan.nama ASC");
                 <th scope="col">No</th>
                 <th scope="col">Nama</th>
                 <th scope="col">Kelas</th>
-                <th scope="col">Guru</th>
                 <th scope="col">Bulan</th>
                 <th scope="col">Capaian Jilid</th>
                 <th scope="col">Hal./ Ayat</th>
@@ -61,7 +60,6 @@ ORDER BY siswa.kelas, laporan.nama ASC");
                     <td><?php echo $no++; ?></td>
                     <td><?php echo $data['nama']; ?></td>
                     <td><?php echo $data['kelas']; ?></td>
-                    <td><?php echo $data['guru']; ?></td>
                     <td><?php echo $data['bulan']; ?></td>
                     <td><?php echo $data['jilid']; ?></td>
                     <td><?php echo $data['halaman']; ?></td>

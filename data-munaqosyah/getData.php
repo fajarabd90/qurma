@@ -8,16 +8,30 @@ $sql = mysqli_query($conn, "SELECT siswa.id, siswa.lembaga, siswa.nama, siswa.ke
     siswa.jenis_kelamin, siswa.no_hp, siswa.alamat, siswa.tempat_lahir, siswa.tgl_lahir,  siswa.ayah,  siswa.ibu,
     CASE
         WHEN siswa.jenis_kelamin <> '' AND siswa.no_hp <> '' AND siswa.alamat <> '' AND siswa.tempat_lahir <> '' AND siswa.tgl_lahir <> '' AND siswa.ayah <> '' AND siswa.ibu <> '' THEN 'Lengkap'
-        ELSE 'Belum lengkap'
+        ELSE 'Belum Lengkap'
     END AS status_lengkap
 FROM siswa
 LEFT JOIN pra_munaqosyah ON siswa.nama = pra_munaqosyah.nama
 WHERE ('$selectedLembaga' = '' OR siswa.lembaga = '$selectedLembaga') AND pra_munaqosyah.nama LIKE '%$searchTerm%' AND pra_munaqosyah.keterangan_pra = 'Lolos'
-GROUP BY siswa.id
 ORDER BY pra_munaqosyah.kelas, pra_munaqosyah.nama ASC");
 
-
 ?>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#example td').each(function() {
+            if ($(this).text() == 'Belum Lengkap') {
+                $(this).parent("tr").css('background-color', '#F1948A');
+                $(this).parent("tr").find("td").css('color', 'white'); // Mengubah warna teks semua sel dalam baris
+            }
+
+            if ($(this).text() == 'Lengkap') {
+                $(this).parent("tr").css('background-color', '#ABEBC6');
+                $(this).parent("tr").find("td").css('color', 'black'); // Mengubah warna teks semua sel dalam baris
+            }
+        });
+    });
+</script>
 
 <div class="tableFixHead" style="height: 400px;">
     <table class="table table-bordered border-dark" id="example">
@@ -59,7 +73,6 @@ ORDER BY pra_munaqosyah.kelas, pra_munaqosyah.nama ASC");
                         }
                         ?>
                     </td>
-
                 </tr>
             <?php } ?>
         </tbody>

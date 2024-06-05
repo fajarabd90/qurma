@@ -32,6 +32,14 @@ if (isset($_POST['bulan'])) {
     $kelas5_tuntas = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '5%' AND ketuntasan_tahfizh = 'Tuntas' AND laporan.bulan = '$bulan'"));
     $kelas6_tuntas = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '6%' AND ketuntasan_tahfizh = 'Tuntas' AND laporan.bulan = '$bulan'"));
 
+    // Menghitung persentase siswa yang tuntas di setiap kelas
+    $persentase_tuntas_kelas1 = round($kelas1_tuntas / $kelas1_siswa * 100);
+    $persentase_tuntas_kelas2 = round($kelas2_tuntas / $kelas2_siswa * 100);
+    $persentase_tuntas_kelas3 = round($kelas3_tuntas / $kelas3_siswa * 100);
+    $persentase_tuntas_kelas4 = round($kelas4_tuntas / $kelas4_siswa * 100);
+    $persentase_tuntas_kelas5 = round($kelas5_tuntas / $kelas5_siswa * 100);
+    $persentase_tuntas_kelas6 = round($kelas6_tuntas / $kelas6_siswa * 100);
+
     //Total belum tuntas
     $kelas1_belum = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '1%' AND ketuntasan_tahfizh = 'Belum Tuntas' AND laporan.bulan = '$bulan'"));
     $kelas2_belum = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '2%' AND ketuntasan_tahfizh = 'Belum Tuntas' AND laporan.bulan = '$bulan'"));
@@ -39,6 +47,14 @@ if (isset($_POST['bulan'])) {
     $kelas4_belum = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '4%' AND ketuntasan_tahfizh = 'Belum Tuntas' AND laporan.bulan = '$bulan'"));
     $kelas5_belum = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '5%' AND ketuntasan_tahfizh = 'Belum Tuntas' AND laporan.bulan = '$bulan'"));
     $kelas6_belum = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '6%' AND ketuntasan_tahfizh = 'Belum Tuntas' AND laporan.bulan = '$bulan'"));
+
+    // Menghitung persentase siswa yang belum tuntas di setiap kelas
+    $persentase_belum_kelas1 =  round($kelas1_belum / $kelas1_siswa * 100);
+    $persentase_belum_kelas2 =  round($kelas2_belum / $kelas2_siswa * 100);
+    $persentase_belum_kelas3 =  round($kelas3_belum / $kelas3_siswa * 100);
+    $persentase_belum_kelas4 =  round($kelas4_belum / $kelas4_siswa * 100);
+    $persentase_belum_kelas5 =  round($kelas5_belum / $kelas5_siswa * 100);
+    $persentase_belum_kelas6 =  round($kelas6_belum / $kelas6_siswa * 100);
 
     //Total juz 30
     $kelas1_30 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '1%' AND juz = '30' AND laporan.bulan = '$bulan'"));
@@ -110,12 +126,28 @@ if (isset($_POST['bulan'])) {
         $kelas_2 = ${"kelas" . $i . "_2"};
         $kelas_3 = ${"kelas" . $i . "_3"};
         $kelas_lain = ${"kelas" . $i . "_lain"};
+        $persentase_tuntas = ${"persentase_tuntas_kelas" . $i};
+        $persentase_belum = ${"persentase_belum_kelas" . $i};
 ?>
         <tr>
             <td><?= $i ?></td>
             <td><?= $kelas_siswa ?: '' ?></td>
-            <td><?= $kelas_tuntas ?: '' ?></td>
-            <td><?= $kelas_belum ?: '' ?></td>
+            <td>
+                <?= $kelas_tuntas ?: '' ?>
+                <?php if ($persentase_tuntas !== '' && $persentase_tuntas != '0') : ?>
+                    <span style="color: <?= $persentase_tuntas < 50 ? 'red' : 'green'; ?>;">
+                        (<?= $persentase_tuntas ?>%)
+                    </span>
+                <?php endif; ?>
+            </td>
+            <td>
+                <?= $kelas_belum ?: '' ?>
+                <?php if ($persentase_belum !== '' && $persentase_belum != '0') : ?>
+                    <span style="color: red;">
+                        (<?= $persentase_belum ?>%)
+                    </span>
+                <?php endif; ?>
+            </td>
             <td><?= $kelas_30 ?: '' ?></td>
             <td><?= $kelas_29 ?: '' ?></td>
             <td><?= $kelas_28 ?: '' ?></td>

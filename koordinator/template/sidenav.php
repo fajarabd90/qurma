@@ -10,6 +10,18 @@
         </a>
     </li>
 
+    <li class="sidebar-item" style="margin-top: -10px;">
+        <a class="sidebar-link" href="../data-guru/index.php">
+            <i class="align-middle" data-feather="user"></i> <span class="align-middle">Data Guru</span>
+        </a>
+    </li>
+
+    <li class="sidebar-item" style="margin-top: -10px;">
+        <a class="sidebar-link" href="../data-siswa/index.php">
+            <i class="align-middle" data-feather="users"></i> <span class="align-middle">Data Siswa</span>
+        </a>
+    </li>
+
     <li class="sidebar-header" style="margin-top: -20px;">
         Administrasi & Laporan
     </li>

@@ -29,19 +29,6 @@ $lembaga = $user['lembaga'];
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <style>
-        .dropdown-item {
-            color: white !important;
-            /* Set warna teks menjadi putih */
-        }
-
-        .dropdown-item:hover {
-            color: white !important;
-            /* Tetapkan warna teks putih bahkan ketika disorot */
-            background-color: #28a745 !important;
-            /* Tetapkan warna latar belakang sesuai keinginan Anda */
-        }
-    </style>
 </head>
 
 <body>
@@ -75,15 +62,15 @@ $lembaga = $user['lembaga'];
                                     <h5 class="card-title mb-0" style="font-size: 16px;">Daftar Peserta Lolos</h5>
 
                                     <div class="ms-auto d-flex align-items-center">
+                                        <a href="peserta.php" target="_blank"><button type="button" class="btn btn-primary btn-sm rounded-pill" style="margin-right: 5px;">
+                                                <i data-feather="printer"></i> Peserta
+                                            </button></a>
+                                        <button type="button" class="btn btn-primary btn-sm rounded-pill" style="margin-right: 5px;" data-bs-toggle="modal" data-bs-target="#form">
+                                            <i data-feather="printer"></i> Form Penilaian
+                                        </button>
                                         <button type="button" class="btn btn-primary btn-sm rounded-pill" style="margin-right: 5px;" data-bs-toggle="modal" data-bs-target="#addData">
                                             <i data-feather="edit"></i> Catat Lolos
                                         </button>
-                                        <a class="btn btn-success btn-sm rounded-pill dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-right: 5px;">Menu</i></a>
-                                        <ul class="dropdown-menu bg-success" aria-labelledby="navbarDropdown">
-                                            <li><a class="dropdown-item text-white" href="pengumuman.php" target="_blank"><i class="fas fa-print"></i> Print Peserta</a></li>
-                                            <li><a class="dropdown-item text-white" data-bs-toggle="modal" data-bs-target="#form"><i class="fas fa-print"></i> Print Form Penilaian</a></li>
-                                        </ul>
-
                                     </div>
                                 </div>
 
@@ -352,7 +339,20 @@ $lembaga = $user['lembaga'];
                         </div>
 
                         <div class="form-floating mb-2">
-                            <input type="text" class="form-control" id="kategori" name="kategori" value="${kategori}" required>
+                            <select class="form-select" id="kategori" name="kategori" required>
+                                <?php $juzs = query("SELECT DISTINCT juz FROM tes ORDER BY juz ASC") ?>
+                                <option selected>${kategori}</option>
+                                <?php foreach ($juzs as $row) : ?>
+                                    <option><?php
+                                            if (empty($row["juz"])) {
+                                                echo "Tartil";
+                                            } else {
+                                                echo "Tahfizh Juz " . $row["juz"];
+                                            }
+                                            ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
                             <label for="kategori">Kategori</label>
                         </div>
 
