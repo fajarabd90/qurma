@@ -22,9 +22,11 @@ if (isset($_POST['import'])) { // Jika user mengklik tombol Import
     // Ambil data pada excel sesuai Kolom
     $lembaga = $row['B'];
     $nama = $row['C'];
+    $status = $row['D'];
+    $sertifikasi = $row['E'];
 
     // Cek jika semua data tidak diisi
-    if ($lembaga == "" && $nama == "")
+    if ($lembaga == "" && $nama == "" && $status == "" && $sertifikasi == "")
       continue; // Lewat data pada baris ini (masuk ke looping selanjutnya / baris selanjutnya)
 
     // Cek $numrow apakah lebih dari 1
@@ -32,7 +34,7 @@ if (isset($_POST['import'])) { // Jika user mengklik tombol Import
     // Jadi dilewat saja, tidak usah diimport
     if ($numrow > 1) {
       // Buat query Insert
-      $query = "INSERT INTO guru VALUES('','" . $lembaga . "','" . $nama . "')";
+      $query = "INSERT INTO guru VALUES('','" . $lembaga . "','" . $nama . "','" . $status . "','" . $sertifikasi . "')";
 
       // Eksekusi $query
       $query = mysqli_query($conn, $query);

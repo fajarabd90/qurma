@@ -22,22 +22,6 @@ WHERE siswa.lembaga = '$lembaga' AND (tes.nama LIKE '%$searchTerm%' OR siswa.kel
 ORDER BY siswa.kelas, tes.nama ASC");
 ?>
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#example td').each(function() {
-            if ($(this).text() == 'Belum') {
-                $(this).parent("tr").css('background-color', '#F1948A');
-                $(this).parent("tr").find("td").css('color', 'white'); // Mengubah warna teks semua sel dalam baris
-            }
-
-            if ($(this).text() == 'Lolos') {
-                $(this).parent("tr").css('background-color', '#ABEBC6');
-                $(this).parent("tr").find("td").css('color', 'black'); // Mengubah warna teks semua sel dalam baris
-            }
-        });
-    });
-</script>
-
 <div class="tableFixHead" style="height: 400px;">
     <table class="table table-bordered border-dark" id="example">
         <thead>

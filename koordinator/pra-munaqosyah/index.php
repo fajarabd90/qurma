@@ -65,11 +65,21 @@ $lembaga = $user['lembaga'];
                                         <a href="peserta.php" target="_blank"><button type="button" class="btn btn-primary btn-sm rounded-pill" style="margin-right: 5px;">
                                                 <i data-feather="printer"></i> Peserta
                                             </button></a>
-                                        <button type="button" class="btn btn-primary btn-sm rounded-pill" style="margin-right: 5px;" data-bs-toggle="modal" data-bs-target="#form">
+
+                                        <?php
+                                        if ($pilih_paket == 'Standar') {
+                                            echo ' <button type="button" class="btn btn-primary btn-sm rounded-pill" style="margin-right: 5px;" id="pro-link2">
                                             <i data-feather="printer"></i> Form Penilaian
-                                        </button>
+                                            <sup style="font-size: smaller; vertical-align: super; background-color: red; color: white; padding: 2px 4px; border-radius: 3px;">Pro</sup>
+                                        </button>';
+                                        } else {
+                                            echo '<button type="button" class="btn btn-primary btn-sm rounded-pill" style="margin-right: 5px;" data-bs-toggle="modal" data-bs-target="#form">
+                                            <i data-feather="printer"></i> Form Penilaian
+                                        </button>';
+                                        }
+                                        ?>
                                         <button type="button" class="btn btn-primary btn-sm rounded-pill" style="margin-right: 5px;" data-bs-toggle="modal" data-bs-target="#addData">
-                                            <i data-feather="edit"></i> Catat Lolos
+                                            <i data-feather="edit"></i> Catat Hasil
                                         </button>
                                     </div>
                                 </div>
@@ -79,7 +89,7 @@ $lembaga = $user['lembaga'];
                                     <div class="modal-dialog modal-xl">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="fas fa-edit"></i> Catat Lolos</h1>
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="fas fa-edit"></i> Catat Hasil</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
@@ -232,6 +242,23 @@ $lembaga = $user['lembaga'];
     </div>
 
     <script src="../../dist/js/app.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var proLink = document.getElementById('pro-link2');
+            if (proLink) {
+                proLink.addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevent the default link action
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Paket Pro Diperlukan',
+                        html: 'Anda harus berlangganan paket pro.<br><br><a href="../harga.php" target="_blank" class="custom-button">Langganan Sekarang</a>',
+                        showConfirmButton: false,
+                    });
+                });
+            }
+        });
+    </script>
 
     <script>
         $(document).ready(function() {

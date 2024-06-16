@@ -15,6 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $catatan = $_POST['catatan'];
     $keterangan = $_POST['keterangan'];
     $kategori = $_POST['kategori'];
+    $guru = $_POST['guru'];
 
     // Loop melalui setiap nilai siswa (asumsi jumlah siswa sesuai dengan $tahun_ajaran)
     foreach ($nama as $key => $value) {
@@ -29,9 +30,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $catatan_clean = $catatan[$key];
         $keterangan_clean = $keterangan[$key];
         $kategori_clean = $kategori[$key];
+        $guru_clean = $guru[$key];
 
         // Buat dan eksekusi query untuk memasukkan data ke dalam database
-        $query = "INSERT INTO tes (nama, jilid, juz, surat, nilai1, nilai2, nilai3, catatan, keterangan, kategori) VALUES ('$nama_clean', '$jilid_clean', '$juz_clean', '$surat_clean', '$nilai1_clean', '$nilai2_clean', '$nilai3_clean', '$catatan_clean', '$keterangan_clean', '$kategori_clean')";
+        $query = "INSERT INTO tes (nama, jilid, juz, surat, nilai1, nilai2, nilai3, catatan, keterangan, kategori, guru) VALUES ('$nama_clean', '$jilid_clean', '$juz_clean', '$surat_clean', '$nilai1_clean', '$nilai2_clean', '$nilai3_clean', '$catatan_clean', '$keterangan_clean', '$kategori_clean', '$guru_clean')";
         $result = mysqli_query($conn, $query);
 
         // Periksa apakah query berhasil dieksekusi

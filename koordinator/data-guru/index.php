@@ -100,6 +100,24 @@ $lembaga = $user['lembaga'];
                                                             <label for="nama">Nama</label>
                                                         </div>
 
+                                                        <div class="form-floating mb-2">
+                                                            <select class="form-select" id="status" name="status" required>
+                                                                <option selected></option>
+                                                                <option value="Koordinator">Koordinator</option>
+                                                                <option value="Guru">Guru</option>
+                                                            </select>
+                                                            <label for="status">Status</label>
+                                                        </div>
+
+                                                        <div class="form-floating mb-2">
+                                                            <select class="form-select" id="sertifikasi" name="sertifikasi" required>
+                                                                <option selected></option>
+                                                                <option value="Sudah">Sudah</option>
+                                                                <option value="Belum">Belum</option>
+                                                            </select>
+                                                            <label for="sertifikasi">Sertifikasi</label>
+                                                        </div>
+
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                                                             <button type="submit" class="btn btn-primary" name="submit">Simpan</button>
@@ -234,6 +252,8 @@ $lembaga = $user['lembaga'];
                 var id = $(event.relatedTarget).closest("tr").find("td:eq(0)").text();
                 var lembaga = $(event.relatedTarget).closest("tr").find("td:eq(2)").text();
                 var nama = $(event.relatedTarget).closest("tr").find("td:eq(3)").text();
+                var status = $(event.relatedTarget).closest("tr").find("td:eq(4)").text();
+                var sertifikasi = $(event.relatedTarget).closest("tr").find("td:eq(5)").text();
 
                 $(this).find('#modal-edit').html($(
                     `
@@ -256,6 +276,24 @@ $lembaga = $user['lembaga'];
                         <div class="form-floating mb-2">
                             <input type="text" class="form-control" id="nama" name="nama" value="${nama}" required>
                             <label for="nama">Nama</label>
+                        </div>
+
+                        <div class="form-floating mb-2">
+                            <select class="form-select" id="status" name="status" required>
+                                <option selected>${status}</option>
+                                <option value="Koordinator">Koordinator</option>
+                                <option value="Guru">Guru</option>
+                            </select>
+                            <label for="status">Status</label>
+                        </div>
+
+                        <div class="form-floating mb-2">
+                            <select class="form-select" id="sertifikasi" name="sertifikasi" required>
+                                <option selected>${sertifikasi}</option>
+                                <option value="Sudah">Sudah</option>
+                                <option value="Belum">Belum</option>
+                            </select>
+                            <label for="sertifikasi">Sertifikasi</label>
                         </div>
 
                         <div class="modal-footer">

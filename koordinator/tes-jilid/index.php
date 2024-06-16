@@ -60,70 +60,11 @@ $lembaga = $user['lembaga'];
                             <div class="card flex-fill w-100">
                                 <div class="card-header d-flex">
                                     <h5 class="card-title mb-0" style="font-size: 16px;">Daftar Tes</h5>
-                                    <div class="ms-auto d-flex align-items-center">
-                                        <button type="button" class="btn btn-primary btn-sm rounded-pill" style="margin-right: 5px;" data-bs-toggle="modal" data-bs-target="#addData">
-                                            <i data-feather="edit"></i> Catat Tes
-                                        </button>
-                                    </div>
                                 </div>
 
                                 <div class="card-body py-3">
                                     <input style="margin-top: -20px;" class="form-control me-2 mb-2" type="text" id="searchInput" placeholder="Filter nama siswa, Guru atau hasil tes..." aria-label="Search">
                                     <div id="mainContent"></div>
-
-                                    <!-- Modal tambah-->
-                                    <div class="modal fade" id="addData" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-xl">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="fas fa-plus"></i> Catat Tes</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-
-                                                    <div class="row justify-content-center align-items-center">
-                                                        <div class="col-auto">
-                                                            <p class="text-center">Masukkan angka baris yang diinginkan :</p>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                            <input type="number" class="form-control mb-2" id="inputAngka" min="0" value="0" style="width: 80px;">
-                                                        </div>
-                                                    </div>
-
-
-                                                    <!-- Form tambah -->
-                                                    <form action="insertData.php" method="post">
-                                                        <div class="tableFixHead" style="height: 500px;">
-
-                                                            <table class="table table-bordered border-dark" id="dataTable">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>No.</th>
-                                                                        <th>Nama</th>
-                                                                        <th>Jilid</th>
-                                                                        <th>Nilai Fashohah-Tartil</th>
-                                                                        <th>Nilai Ghorib/Tajwid</th>
-                                                                        <th>Nilai Turjuman/KBQ</th>
-                                                                        <th>Catatan</th>
-                                                                        <th>Keterangan</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-
-                                                                </tbody>
-                                                            </table>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-primary">Submit</button>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                    <!-- Akhir form tambah -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Akhir modal tambah -->
 
                                     <!-- Modal edit-->
                                     <div class="modal fade" id="editData" tabindex="-1" aria-labelledby="editData" aria-hidden="true">
@@ -159,109 +100,6 @@ $lembaga = $user['lembaga'];
     <script src="../../dist/js/app.js"></script>
 
     <script>
-        // Fungsi untuk menambahkan baris baru
-        function tambahBaris() {
-            var table = document.getElementById("dataTable").getElementsByTagName('tbody')[0];
-            var rowCount = table.rows.length; // Jumlah total baris yang ada
-
-            var row = table.insertRow(rowCount); // Insert di akhir tabel, indeks rowCount
-
-            // Kolom nomor urut
-            var cellNo = row.insertCell(0);
-            cellNo.innerHTML = rowCount + 1; // Nomor urut dimulai dari 1
-            cellNo.style.width = "5px"; // Atur lebar sel menjadi 150px
-
-            // Kolom nama
-            var cellNama = row.insertCell(1);
-            cellNama.style.width = "250px";
-
-            // Menggunakan AJAX untuk mengambil data dari server
-            $.ajax({
-                url: "getSiswa.php", // Ganti dengan URL ke file PHP yang akan mengambil data dari database
-                type: "GET",
-                dataType: "json",
-                success: function(response) {
-                    if (response.success) {
-                        // Jika pengambilan data berhasil
-                        var options = "<input class='form-control' list='datalistOptions' placeholder='Nama Siswa' name='nama[]' required> <datalist id='datalistOptions'>";
-                        // Menambahkan opsi kosong pertama
-                        options += "<option value=''>Pilih Nama</option>";
-                        // Loop melalui setiap nama dan tambahkan ke dalam opsi dropdown
-                        $.each(response.data, function(index, value) {
-                            options += "<option value='" + value + "'>" + value + "</option>";
-                        });
-                        options += "</datalist>";
-                        // Memasukkan opsi dropdown ke dalam sel
-                        cellNama.innerHTML = options;
-                    } else {
-                        // Jika ada kesalahan dalam pengambilan data
-                        console.error(response.message);
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error("Terjadi kesalahan dalam melakukan AJAX: " + error);
-                }
-            });
-
-            // Kolom jilid
-            var cellJilid = row.insertCell(2);
-            cellJilid.innerHTML = "<select class='form-select' name='jilid[]' required>" +
-                "<option selected></option>" +
-                "<option value='1'>1</option>" +
-                "<option value='2'>2</option>" +
-                "<option value='3'>3</option>" +
-                "<option value='4'>4</option>" +
-                "<option value='5'>5</option>" +
-                "<option value='6'>6</option>" +
-                "<option value='Al Quran'>Al Quran</option>" +
-                "<option value='Ghorib 1'>Ghorib 1</option>" +
-                "<option value='Ghorib 2'>Ghorib 2</option>" +
-                "<option value='Tajwid 1'>Tajwid 1</option>" +
-                "<option value='Tajwid 2'>Tajwid 2</option>" +
-                "<option value='Turjuman A'>Turjuman A</option>" +
-                "<option value='Turjuman B'>Turjuman B</option>" +
-                "<option value='KBQ'>KBQ</option>" +
-                "</select>";
-            cellJilid.style.width = "155px";
-
-            var cellJuz = row.insertCell(3);
-            cellJuz.innerHTML = "<input type='hidden' class='form-control' name='juz[]'>";
-            cellJuz.style.display = "none";
-
-            var cellSurat = row.insertCell(4);
-            cellSurat.innerHTML = "<input type='hidden' class='form-control' name='surat[]'>";
-            cellSurat.style.display = "none";
-
-            var cellNilai1 = row.insertCell(5);
-            cellNilai1.innerHTML = "<input type='text' class='form-control' name='nilai1[]'>";
-            cellNilai1.style.width = "100px";
-
-            var cellNilai2 = row.insertCell(6);
-            cellNilai2.innerHTML = "<input type='text' class='form-control' name='nilai2[]'>";
-            cellNilai2.style.width = "100px";
-
-            var cellNilai3 = row.insertCell(7);
-            cellNilai3.innerHTML = "<input type='text' class='form-control' name='nilai3[]'>";
-            cellNilai3.style.width = "100px";
-
-            var cellCatatan = row.insertCell(8);
-            cellCatatan.innerHTML = "<input type='text' class='form-control' name='catatan[]'>";
-            cellCatatan.style.width = "280px";
-
-            var cellKeterangan = row.insertCell(9);
-            cellKeterangan.innerHTML = "<select class='form-select' name='keterangan[]' required>" +
-                "<option selected></option>" +
-                "<option value='Belum'>Belum</option>" +
-                "<option value='Lulus'>Lulus</option>" +
-                "<option value='Ke Pra Munaqosyah'>Ke Pra Munaqosyah</option>" +
-                "</select>";
-            cellKeterangan.style.width = "130px";
-
-            var cellKategori = row.insertCell(10);
-            cellKategori.innerHTML = "<input type='hidden' class='form-control' name='kategori[]' value='Tartil'>";
-            cellKategori.style.display = "none";
-        }
-
         // Fungsi untuk menangani perubahan nilai input angka
         function handleInputChange() {
             var table = document.getElementById("dataTable").getElementsByTagName('tbody')[0];
@@ -287,6 +125,23 @@ $lembaga = $user['lembaga'];
 
         // Tambahkan event listener untuk menangani perubahan nilai input
         inputAngka.addEventListener("change", handleInputChange);
+
+        function setAllLulus(checkbox) {
+            var table = document.getElementById("dataTable").getElementsByTagName('tbody')[0];
+            var rows = table.rows;
+
+            if (checkbox.checked) {
+                for (var i = 0; i < rows.length; i++) {
+                    var keteranganSelect = rows[i].cells[9].getElementsByTagName('select')[0];
+                    keteranganSelect.value = 'Lulus';
+                }
+            } else {
+                for (var i = 0; i < rows.length; i++) {
+                    var keteranganSelect = rows[i].cells[9].getElementsByTagName('select')[0];
+                    keteranganSelect.value = ''; // Mengosongkan pilihan jika checkbox tidak dicentang
+                }
+            }
+        }
     </script>
 
     <script>
@@ -362,6 +217,7 @@ $lembaga = $user['lembaga'];
                 var catatan = $(event.relatedTarget).closest("tr").find("td:eq(12)").text();
                 var keterangan = $(event.relatedTarget).closest("tr").find("td:eq(13)").text();
                 var kategori = $(event.relatedTarget).closest("tr").find("td:eq(14)").text();
+                var guru = $(event.relatedTarget).closest("tr").find("td:eq(15)").text();
 
                 $(this).find('#modal-edit').html($(
                     `
@@ -373,6 +229,7 @@ $lembaga = $user['lembaga'];
                     <input type="hidden" name="kategori" value="${kategori}">
                     <input type="hidden" name="juz" value="${juz}">
                     <input type="hidden" name="surat" value="${surat}">
+                    <input type="hidden" name="guru" value="${guru}">
 
                     <?php $siswa = query("SELECT * FROM siswa WHERE lembaga = '$lembaga'") ?>
                     <input class="form-control mb-2" list="datalistOptions" id="nama" placeholder="Nama Siswa" name="nama" value="${nama}" required>

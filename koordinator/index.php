@@ -13,6 +13,11 @@ $user->execute([$id]);
 $user = $user->fetch(PDO::FETCH_ASSOC);
 $lembaga = $user['lembaga'];
 
+$paket = $conn_pdo->prepare("SELECT * FROM `paket` WHERE lembaga = '$lembaga'");
+$paket->execute();
+$paket = $paket->fetch(PDO::FETCH_ASSOC);
+$pilih_paket = $paket['paket'];
+
 date_default_timezone_set('Asia/Jakarta');
 
 function tentukan_semester($bulan)
@@ -40,6 +45,32 @@ $bulan = str_replace(
 );
 // Mendapatkan tahun saat ini
 $tahun = date("Y");
+
+// Mendapatkan tanggal saat ini
+$tanggal = date("d");
+// Mendapatkan nomor bulan saat ini
+$bulan2 = date("n"); // "n" memberikan angka bulan tanpa leading zero
+// Mendapatkan tahun saat ini
+$tahun = date("Y");
+
+// Array nama bulan dalam bahasa Indonesia
+$nama_bulan = array(
+    1 => "Januari",
+    2 => "Februari",
+    3 => "Maret",
+    4 => "April",
+    5 => "Mei",
+    6 => "Juni",
+    7 => "Juli",
+    8 => "Agustus",
+    9 => "September",
+    10 => "Oktober",
+    11 => "November",
+    12 => "Desember"
+);
+
+// Mendapatkan nama bulan dalam bahasa Indonesia
+$nama_bulan_indonesia = $nama_bulan[$bulan2];
 ?>
 
 <!DOCTYPE html>
@@ -53,6 +84,44 @@ $tahun = date("Y");
     <link rel="shortcut icon" href="../assets/img/logo.png" />
     <link href="../dist/css/app.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .custom-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: #3085d6;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .custom-button:hover {
+            background-color: #2565a8;
+        }
+
+        .custom-link-button {
+            display: inline-block;
+            padding: 5px 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: red;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .custom-link-button:hover {
+            background-color: darkred;
+        }
+    </style>
 </head>
 
 <body>
@@ -97,9 +166,21 @@ $tahun = date("Y");
                         <a class="sidebar-link" href="administrasi-harian/index.php" style="margin-top: -5px;">
                             <i class="align-middle" data-feather="edit"></i> <span class="align-middle">Administrasi Harian</span>
                         </a>
-                        <a class="sidebar-link" href="laporan-bulanan/index.php" style="margin-top: -5px;">
-                            <i class="align-middle" data-feather="trending-up"></i> <span class="align-middle">Laporan Bulanan</span>
-                        </a>
+                        <?php
+
+                        if ($pilih_paket == 'Standar') {
+                            echo '<a class="sidebar-link" href="#" style="margin-top: -5px;" id="pro-link">
+            <i class="align-middle" data-feather="trending-up"></i>
+            <span class="align-middle">Laporan Bulanan</span>
+            <sup style="font-size: smaller; vertical-align: super; background-color: red; color: white; padding: 2px 4px; border-radius: 3px;">Pro</sup>
+          </a>';
+                        } else {
+                            echo '<a class="sidebar-link" href="laporan-bulanan/index.php" style="margin-top: -5px;">
+            <i class="align-middle" data-feather="trending-up"></i> 
+            <span class="align-middle">Laporan Bulanan</span>
+          </a>';
+                        }
+                        ?>
                     </li>
 
                     <li class="sidebar-header" style="margin-top: -20px;">
@@ -186,8 +267,8 @@ $tahun = date("Y");
                     <h1 class="h1 mb-3" style="margin-top: -10px;">Dashboard</h1>
 
                     <?php
-                    $tesJilid = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM tes INNER JOIN siswa ON tes.nama = siswa.nama WHERE lembaga = '$lembaga' AND keterangan = '' AND kategori = 'Tartil'"));
-                    $tesTahfizh = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM tes INNER JOIN siswa ON tes.nama = siswa.nama WHERE lembaga = '$lembaga' AND keterangan = '' AND kategori = 'Tahfizh'"));
+                    $tesJilid = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM tes INNER JOIN siswa ON tes.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND tes.keterangan = '' AND tes.kategori = 'Tartil'"));
+                    $tesTahfizh = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM tes INNER JOIN siswa ON tes.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND tes.keterangan = '' AND tes.kategori = 'Tahfizh'"));
                     ?>
 
                     <?php if ($tesJilid > 0) : ?>
@@ -204,7 +285,26 @@ $tahun = date("Y");
                         </div>
                     <?php endif; ?>
 
-                    <div class="row">
+                    <?php
+
+                    if ($pilih_paket == 'Standar') {
+                        echo '<div class="row">
+                        <div class="col-xl-12">
+                            <div class="card flex-fill w-100">
+                                <div class="card-header d-flex">
+                                    <h5 class="card-title mb-0" style="font-size: 16px;">Data Laporan</h5>
+                                </div>
+
+                                <div class="card-body" style="margin-top: -10px; margin-bottom: 10px;">
+                                    Data Laporan Perkembangan Tahsin dan Tahfizh tersedia dalam <a href="../harga.php" target="_blank" class="custom-link-button">
+                                        versi Pro
+                                    </a>.
+                                </div>
+                            </div>
+                        </div>
+                    </div>';
+                    } else {
+                        echo '<div class="row">
                         <div class="col-xl-12">
                             <div class="card flex-fill w-100">
                                 <div class="card-header d-flex">
@@ -213,36 +313,8 @@ $tahun = date("Y");
 
                                 <div class="card-body" style="margin-top: -10px; margin-bottom: 10px;">
 
-                                    <?php
-                                    // Mendapatkan tanggal saat ini
-                                    $tanggal = date("d");
-                                    // Mendapatkan nomor bulan saat ini
-                                    $bulan = date("n"); // "n" memberikan angka bulan tanpa leading zero
-                                    // Mendapatkan tahun saat ini
-                                    $tahun = date("Y");
-
-                                    // Array nama bulan dalam bahasa Indonesia
-                                    $nama_bulan = array(
-                                        1 => "Januari",
-                                        2 => "Februari",
-                                        3 => "Maret",
-                                        4 => "April",
-                                        5 => "Mei",
-                                        6 => "Juni",
-                                        7 => "Juli",
-                                        8 => "Agustus",
-                                        9 => "September",
-                                        10 => "Oktober",
-                                        11 => "November",
-                                        12 => "Desember"
-                                    );
-
-                                    // Mendapatkan nama bulan dalam bahasa Indonesia
-                                    $nama_bulan_indonesia = $nama_bulan[$bulan];
-                                    ?>
-
-                                    <select class="form-select mb-3" aria-label="Default select example" id='bulan-pilih'>
-                                        <option value="<?= $nama_bulan_indonesia ?>"><?= $nama_bulan_indonesia ?></option>
+                                    <select class="form-select mb-3" aria-label="Default select example" id="bulan-pilih">
+                                        <option value="' .  $nama_bulan_indonesia . '">' . $nama_bulan_indonesia . '</option>
                                         <option value="Januari">Januari</option>
                                         <option value="Februari">Februari</option>
                                         <option value="Maret">Maret</option>
@@ -316,7 +388,9 @@ $tahun = date("Y");
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>';
+                    }
+                    ?>
                 </div>
             </main>
 
@@ -340,6 +414,23 @@ $tahun = date("Y");
     </div>
 
     <script src="../dist/js/app.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var proLink = document.getElementById('pro-link');
+            if (proLink) {
+                proLink.addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevent the default link action
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Paket Pro Diperlukan',
+                        html: 'Anda harus berlangganan paket pro.<br><br><a href="../harga.php" target="_blank" class="custom-button">Langganan Sekarang</a>',
+                        showConfirmButton: false,
+                    });
+                });
+            }
+        });
+    </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

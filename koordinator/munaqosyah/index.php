@@ -181,20 +181,39 @@ if (isset($_POST['download_excel'])) {
                                     <h5 class="card-title mb-0" style="font-size: 16px;">Data Peserta Munaqosyah</h5>
 
                                     <div class="ms-auto d-flex align-items-center">
-                                        <a href="../no-peserta/index.php"><button type="button" class="btn btn-primary btn-sm rounded-pill" style="margin-right: 5px;">
-                                                <i data-feather="edit"></i> Input Nomor & Kartu
-                                            </button></a>
-                                        <a href="../lulus/index.php"><button type="button" class="btn btn-primary btn-sm rounded-pill" style="margin-right: 5px;">
-                                                <i data-feather="edit"></i> Input Lulus
-                                            </button></a>
+                                        <button type="button" id="copyLinkButton" class="btn btn-primary btn-sm rounded-pill" style="margin-right: 5px;">
+                                            <i data-feather="copy"></i> Copy Link Data Munaqosyah
+                                        </button>
+
+                                        <input type="text" id="linkToCopy" value="https://qurma.site/data-munaqosyah/index.php" style="position: absolute; left: -9999px;">
                                         <a class="btn btn-success btn-sm rounded-pill dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-right: 5px;">Lainnya</i></a>
                                         <ul class="dropdown-menu bg-success" aria-labelledby="navbarDropdown">
                                             <li><a class="dropdown-item text-white" href="pengumuman.php" target="_blank"><i class="fas fa-print"></i> Print Peserta</a></li>
-                                            <li>
+
+
+                                            <?php
+                                            if ($pilih_paket == 'Standar') {
+                                                echo '<li><a class="dropdown-item text-white" id="pro-link3"><i class="fas fa-file-excel"></i> <span class="align-middle"> Download Data</span>
+            <sup style="font-size: smaller; vertical-align: super; background-color: red; color: white; padding: 2px 4px; border-radius: 3px;">Pro</sup></a></li>';
+                                            } else {
+                                                echo '<li>
                                                 <form method="post">
                                                     <button type="submit" name="download_excel" class="dropdown-item text-white"><i class="fas fa-file-excel"></i> Download Data</button>
                                                 </form>
-                                            </li>
+                                            </li>';
+                                            }
+                                            ?>
+
+                                            <?php
+                                            if ($pilih_paket == 'Standar') {
+                                                echo '<li><a class="dropdown-item text-white" id="pro-link2"><i class="fas fa-edit"></i> <span class="align-middle"> Input Nomor & Kartu</span>
+            <sup style="font-size: smaller; vertical-align: super; background-color: red; color: white; padding: 2px 4px; border-radius: 3px;">Pro</sup></a></li>';
+                                            } else {
+                                                echo '<li><a class="dropdown-item text-white" href="../no-peserta/index.php"><i class="fas fa-edit"></i> Input Nomor & Kartu</a></li>';
+                                            }
+                                            ?>
+
+                                            <li><a class="dropdown-item text-white" href="../lulus/index.php"><i class="fas fa-edit"></i> Input Hasil</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -311,6 +330,52 @@ if (isset($_POST['download_excel'])) {
     <script src="../../dist/js/app.js"></script>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var proLink = document.getElementById('pro-link2');
+            if (proLink) {
+                proLink.addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevent the default link action
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Paket Pro Diperlukan',
+                        html: 'Anda harus berlangganan paket pro.<br><br><a href="../harga.php" target="_blank" class="custom-button">Langganan Sekarang</a>',
+                        showConfirmButton: false,
+                    });
+                });
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var proLink = document.getElementById('pro-link3');
+            if (proLink) {
+                proLink.addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevent the default link action
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Paket Pro Diperlukan',
+                        html: 'Anda harus berlangganan paket pro.<br><br><a href="../harga.php" target="_blank" class="custom-button">Langganan Sekarang</a>',
+                        showConfirmButton: false,
+                    });
+                });
+            }
+        });
+    </script>
+
+    <script>
+        document.getElementById('copyLinkButton').addEventListener('click', function() {
+            // Select the link
+            var link = document.getElementById('linkToCopy');
+            link.select();
+            link.setSelectionRange(0, 99999); // For mobile devices
+
+            // Copy the text inside the input field
+            document.execCommand('copy');
+
+            // Alert the copied text (or you can use a more sophisticated UI feedback)
+            alert('Link copied to clipboard: ' + link.value);
+        });
+
+
         $(document).ready(function() {
             // Add event listener for teacherFilter change
             $('#kategoriFilter').change(function() {

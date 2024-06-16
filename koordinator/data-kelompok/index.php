@@ -29,6 +29,19 @@ $lembaga = $user['lembaga'];
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .dropdown-item {
+            color: white !important;
+            /* Set warna teks menjadi putih */
+        }
+
+        .dropdown-item:hover {
+            color: white !important;
+            /* Tetapkan warna teks putih bahkan ketika disorot */
+            background-color: #28a745 !important;
+            /* Tetapkan warna latar belakang sesuai keinginan Anda */
+        }
+    </style>
 </head>
 
 <body>
@@ -60,12 +73,17 @@ $lembaga = $user['lembaga'];
                             <div class="card flex-fill w-100">
                                 <div class="card-header d-flex">
                                     <h5 class="card-title mb-0" style="font-size: 16px;">Data Kelompok</h5>
+
                                     <div class="ms-auto d-flex align-items-center">
                                         <button type="button" class="btn btn-success rounded-pill btn-sm" data-bs-toggle="modal" data-bs-target="#addData" style="margin-right: 5px;"><i class="fas fa-edit me-1"></i>Tambah</button>
                                         <button type="button" class="btn btn-primary btn-sm rounded-pill" style="margin-right: 5px;" data-bs-toggle="modal" data-bs-target="#addMassal">
                                             <i data-feather="users"></i> Atur Kelompok
                                         </button>
-                                        <button class="btn btn-sm btn-danger rounded-pill" id="hapusDataButton"><i class="fas fa-trash"></i> Reset</button>
+                                        <a class="btn btn-success btn-sm rounded-pill dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-right: 5px;">Lainnya</i></a>
+                                        <ul class="dropdown-menu bg-success" aria-labelledby="navbarDropdown">
+                                            <li><a class="dropdown-item text-white" onclick="printKelompok()"><i class="fas fa-print"></i> Print Kelompok</a></li>
+                                            <li><a class="dropdown-item text-white" id="hapusDataButton"><i class="fas fa-trash"></i> Reset</a></li>
+                                        </ul>
                                     </div>
                                 </div>
 
@@ -126,7 +144,10 @@ $lembaga = $user['lembaga'];
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <div class="card-body">
+                                                    <div class="card-body" style="margin-top: -10px;">
+                                                        <div class="alert alert-danger" role="alert">
+                                                            Mengatur kelompok dari menu ini hanya dapat dilakukan di awal pembagian saja! Jika sudah input kemudian ingin merubah guru dari siswa, harus dilakukan pada tombol edit dalam tabel!
+                                                        </div>
                                                         <div class="d-flex justify-content-between mb-2">
                                                             <p class="me-3">Silahkan pilih Kelas terlebih dahulu:</p>
                                                         </div>
@@ -192,6 +213,27 @@ $lembaga = $user['lembaga'];
     <script src="../../dist/js/app.js"></script>
 
     <script>
+        function printKelompok() {
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+
+            document.body.appendChild(iframe);
+
+            fetch('pengumuman.php')
+                .then(response => response.text())
+                .then(htmlContent => {
+                    iframe.contentDocument.write(htmlContent);
+                    iframe.contentDocument.close();
+
+                    // Wait for content to load (adjust the delay as needed)
+                    setTimeout(() => {
+                        iframe.contentWindow.print();
+                        document.body.removeChild(iframe);
+                    }, 1000);
+                })
+                .catch(error => console.error('Error fetching content:', error));
+        }
+
         $(document).ready(function() {
             // Add event listener for teacherFilter change
             $('#kelasFilter').change(function() {

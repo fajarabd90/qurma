@@ -83,7 +83,6 @@ $lembaga = $user['lembaga'];
         ?>
 
             <div class="nametag">
-
                 <div class="nametag-info">
                     <div style="display: flex; align-items: center;">
                         <img src="../../assets/img/logo.png" alt="" height="43" style="margin-right: <?php echo ($row['kategori'] == 'Tartil') ? '50px' : '22px'; ?>; margin-left: 10px; margin-top: -21px">
@@ -91,8 +90,13 @@ $lembaga = $user['lembaga'];
                             <?php echo $row['kategori']; ?>
                         </p>
                     </div>
-                    <p style="margin-top: 14px; font-size: 18px;"><?= $row['lembaga']; ?></p>
+
+                    <p style="font-size: 18px; color: #088030; margin-top: 14px; display: flex; align-items: center; justify-content: center; height: 40px;">
+                        <?= $row['lembaga']; ?>
+                    </p>
+
                     <p style="margin-top: 25px;"><?= $row['nomor']; ?></p>
+
                     <p style="font-size: 18px; color: #088030; margin-top: 30px; display: flex; align-items: center; justify-content: center; height: 40px;">
                         <?= ucwords(strtolower($row['nama'])); ?>
                     </p>

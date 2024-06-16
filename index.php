@@ -42,11 +42,12 @@ if (isset($_POST['submit'])) {
   <meta name="description" content="">
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Hugo 0.104.2">
-  <title>Sign In</title>
+  <title>LMS Metode UMMI</title>
   <link rel="shortcut icon" href="assets/img/logo.png" />
   <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/pricing/">
   <link href="dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <style>
     .bd-placeholder-img {
@@ -107,11 +108,16 @@ if (isset($_POST['submit'])) {
       height: 100vh;
       /* Untuk membuatnya terpusat secara vertikal */
     }
+
+    .password-toggle {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      z-index: 1;
+    }
   </style>
-
-
-  <!-- Custom styles for this template -->
-  <link href="pricing.css" rel="stylesheet">
 </head>
 
 <body>
@@ -132,9 +138,9 @@ if (isset($_POST['submit'])) {
         </a>
 
         <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-          <a class="me-3 py-2 text-dark text-decoration-none" href="#">Fitur</a>
-          <a class="me-3 py-2 text-dark text-decoration-none" href="#">Harga</a>
-          <a class="py-2 text-dark text-decoration-none" href="#">Tentang Kami</a>
+          <a class="me-3 py-2 text-dark text-decoration-none" href="index.php">Fitur</a>
+          <a class="me-3 py-2 text-dark text-decoration-none" href="harga.php">Harga</a>
+          <a class="py-2 text-dark text-decoration-none" href="about.php">Tentang Kami</a>
         </nav>
       </div>
 
@@ -146,11 +152,10 @@ if (isset($_POST['submit'])) {
 
       <center>
         <div class="d-grid gap-2 d-md-block mx-auto mb-3 col-6">
-          <button class="btn btn-primary" type="button" style="width: 150px;" data-bs-toggle="modal" data-bs-target="#signin">Sign-in</button>
-          <button class="btn btn-primary" type="button" style="width: 150px;">Get Product</button>
+          <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#signin">Log-in</button>
+          <button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#demo">Get Demo</button>
+          <a href="harga.php" class="btn btn-primary" role="button">Get Product</a>
         </div>
-
-        <a href="data-munaqosyah/index.php">Klik ini, untuk orang tua melengkapi data munaqosyah ></a>
       </center>
     </header>
 
@@ -159,7 +164,7 @@ if (isset($_POST['submit'])) {
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="fas fa-sign-in-alt"></i> Sign-in</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="fas fa-sign-in-alt"></i> Log-in</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -172,16 +177,24 @@ if (isset($_POST['submit'])) {
               </center>
               <?php
               if (isset($message)) {
-                foreach ($message as $message) {
+                foreach ($message as $msg) {
                   echo '
-         <div class="alert alert-danger mb-2" role="alert"">
-            <span>' . $message . '</span>
-            <i class="fas fa-times" onclick="this.parentElement.remove();"></i>
-         </div>
-         ';
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "' . addslashes($msg) . '",
+                showConfirmButton: true,
+                confirmButtonText: "OK"
+            });
+        });
+        </script>
+        ';
                 }
               }
               ?>
+
 
               <div class="form-floating mb-2">
 
@@ -189,8 +202,11 @@ if (isset($_POST['submit'])) {
                 <label for="floatingInput">Email address</label>
               </div>
               <div class="form-floating mb-2">
-                <input type="password" class="form-control" name="password" id="floatingPassword" placeholder="Password">
+                <input type="password" class="form-control" name="password" id="password" placeholder="Password">
                 <label for="floatingPassword">Password</label>
+                <div class="password-toggle" id="password" onclick="togglePasswordVisibility()">
+                  <i id="eyeIcon" class='far fa-eye'></i>
+                </div>
               </div>
               <button class="w-100 btn btn-lg btn-primary mb-2" type="submit" name="submit">Submit</button>
             </form>
@@ -201,6 +217,56 @@ if (isset($_POST['submit'])) {
     </div>
     <!-- Akhir modal sign-in -->
 
+    <!-- Modal demo-->
+    <div class="modal fade" id="demo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="fas fa-sign-in-alt"></i> Log-in Demo</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+            <!-- Form demo -->
+            <form action="" method="post">
+              <center>
+                <img class="mb-1" src="assets/img/logo-ummi.png" alt="" width="80" height="80">
+                <h1 class="h3 mb-3 fw-normal">LMS Metode UMMI</h1>
+              </center>
+              <?php
+              if (isset($message)) {
+                foreach ($message as $msg) {
+                  echo '
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "' . addslashes($msg) . '",
+                showConfirmButton: true,
+                confirmButtonText: "OK"
+            });
+        });
+        </script>
+        ';
+                }
+              }
+              ?>
+              <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="email">
+                <option selected>Masuk Sebagai</option>
+                <option value="demo_koordinator">Koordinator</option>
+                <option value="demo_guru">Guru</option>
+              </select>
+              <input type="hidden" class="form-control" name="password" value="">
+              <button class="w-100 btn btn-lg btn-primary mb-2" type="submit" name="submit">Submit</button>
+            </form>
+            <!-- Akhir form demo -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Akhir modal demo -->
+
     <main>
       <div id="carouselExampleDark" class="carousel carousel-dark slide mt-5">
         <div class="carousel-indicators">
@@ -210,24 +276,24 @@ if (isset($_POST['submit'])) {
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active" data-bs-interval="10000">
-            <img src="assets/img/slide1.png" class="d-block w-100" alt="...">
+            <img src="assets/img/Dashboard.png" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
               <h5>Halaman Dashboard</h5>
               <p>Memuat laporan perkembangan jilid.</p>
             </div>
           </div>
           <div class="carousel-item" data-bs-interval="2000">
-            <img src="assets/img/slide2.png" class="d-block w-100" alt="...">
+            <img src="assets/img/Data Tes Jilid.png" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
               <h5>Halaman Tes Jilid</h5>
               <p>Mengelola tes jilid dan mencatatkan hasilnya.</p>
             </div>
           </div>
           <div class="carousel-item">
-            <img src="assets/img/slide3.png" class="d-block w-100" alt="...">
+            <img src="assets/img/Data Munaqosyah.png" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
-              <h5>Halaman Print Kartu Munaqosyah</h5>
-              <p>Mencetak otomatis nomor dan kartu peserta Munaqosyah.</p>
+              <h5>Halaman Munaqosyah</h5>
+              <p>Mengelola data Munaqosyah, mencetak kartu Munaqosyah dan mengintegrasikan data ke SIM UF .</p>
             </div>
           </div>
         </div>
@@ -248,12 +314,54 @@ if (isset($_POST['submit'])) {
       <div class="card mb-3 col-12">
         <div class="row g-0">
           <div class="col-md-4">
-            <img src="assets/img/slide1.png" class="img-fluid rounded-start" alt="...">
+            <img src="assets/img/Dashboard.png" class="img-fluid rounded-start" alt="...">
           </div>
           <div class="col-md-8">
             <div class="card-body">
-              <h5 class="card-title">Dashboard Perkembangan Jilid</h5>
-              <p class="card-text">Menampilkan perkembangan jilid dan riwayat perkembangan siswa secara real time ketika Guru memasukkan laporan bulanan.</p>
+              <h5 class="card-title">Dashboard Perkembangan Siswa</h5>
+              <p class="card-text">Menampilkan perkembangan jilid dan juz hafalan siswa secara real time ketika Guru memasukkan laporan bulanan.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 col-12">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="assets/img/Data Tes Jilid.png" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Pengelolaan Tes Jilid dan Tes Tahfizh</h5>
+              <p class="card-text">Mengelola Tes Jilid individual maupun kelompok dengan pencatatan nilai dan hasil lulus atau belum lulus.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 col-12">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="assets/img/Data Munaqosyah.png" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Pengelolaan Pra Munaqosyah dan Munaqosyah</h5>
+              <p class="card-text">Mengelola data Pra Munaqosyah dan Munaqosyah, mencetak form Pra Munaqosyah, integrasi data Munaqosyah ke SIM UF, mencetak nomor dan kartu Munaqosyah.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 col-12">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="assets/img/Data Khotaman.png" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Pengelolaan Khotaman</h5>
+              <p class="card-text">Mengelola data Khotaman dan mendownload hasilnya dalam bentuk excel.</p>
             </div>
           </div>
         </div>
@@ -274,6 +382,20 @@ if (isset($_POST['submit'])) {
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <script>
+    function togglePasswordVisibility() {
+      var passwordField = document.getElementById("password");
+      var toggleButton = document.getElementById("togglePassword");
+
+      if (passwordField.type === "password") {
+        passwordField.type = "text";
+        toggleButton.innerHTML = "<i class='far fa-eye-slash'></i>";
+      } else {
+        passwordField.type = "password";
+        toggleButton.innerHTML = "<i class='far fa-eye'></i>";
+      }
+    }
+  </script>
 </body>
 
 </html>

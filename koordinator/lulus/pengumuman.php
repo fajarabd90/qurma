@@ -84,7 +84,7 @@ ORDER BY siswa.kelas, tes.nama ASC");
 <body>
     <div class="container">
         <div class="title">
-            <img src="../../administrator/logo/img/<?= $lembaga ?>.png" alt="Logo UMMI" height="80"><br><br> DAFTAR PESERTA LULUS MUNAQOSYAH METODE UMMI <br> <?= $lembaga ?> <br> <input type='text' class='form-control' style="width: 520px; height:25px; font-size: 18px; weight: 10px; border: none; text-align: center;" placeholder="Sebelum print, masukkan Hari dan Tanggal pelaksanaan disini...">
+            <img src="../../administrator/logo/img/<?= $lembaga ?>.png" alt="Logo Lembaga" height="80"><br><br> DAFTAR PESERTA LULUS MUNAQOSYAH METODE UMMI <br> <?= $lembaga ?> <br> <input type='text' class='form-control' style="width: 520px; height:25px; font-size: 18px; weight: 10px; border: none; text-align: center;" placeholder="Sebelum print, masukkan Hari dan Tanggal pelaksanaan disini...">
         </div>
 
         <div class="tableFixHead" style="height: 400px;">

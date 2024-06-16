@@ -152,9 +152,11 @@ use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
                                                 // Ambil data pada excel sesuai Kolom
                                                 $lembaga = $row['B'];
                                                 $nama = $row['C'];
+                                                $status = $row['D'];
+                                                $sertifikasi = $row['E'];
 
                                                 // Cek jika semua data tidak diisi
-                                                if ($lembaga == "" && $nama == "")
+                                                if ($lembaga == "" && $nama == "" && $status == "" && $sertifikasi == "")
                                                     continue; // Lewat data pada baris ini (masuk ke looping selanjutnya / baris selanjutnya)
 
                                                 // Cek $numrow apakah lebih dari 1
@@ -164,15 +166,19 @@ use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
                                                     // Validasi apakah telah diisi
                                                     $lembaga_td = (!empty($lembaga)) ? "" : " style='background: #E07171;'";
                                                     $nama_td = (!empty($nama)) ? "" : " style='background: #E07171;'";
+                                                    $status_td = (!empty($status)) ? "" : " style='background: #E07171;'";
+                                                    $sertifikasi_td = (!empty($sertifikasi)) ? "" : " style='background: #E07171;'";
 
                                                     // Jika salah satu data ada yang kosong
-                                                    if ($lembaga == "" && $nama == "") {
+                                                    if ($lembaga == "" && $nama == "" && $status == "" && $sertifikasi == "") {
                                                         $kosong++; // Tambah 1 variabel $kosong
                                                     }
 
                                                     echo "<tbody><tr>";
                                                     echo "<td" . $lembaga_td . ">" . $lembaga . "</td>";
                                                     echo "<td" . $nama_td . ">" . $nama . "</td>";
+                                                    echo "<td" . $status_td . ">" . $status . "</td>";
+                                                    echo "<td" . $sertifikasi_td . ">" . $sertifikasi . "</td>";
                                                     echo "</tr></tbody>";
                                                 }
 

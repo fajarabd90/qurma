@@ -11,6 +11,67 @@ if (!isset($id)) {
 $user = $conn_pdo->prepare("SELECT * FROM `user` WHERE id = ?");
 $user->execute([$id]);
 $user = $user->fetch(PDO::FETCH_ASSOC);
+$lembaga = $user['lembaga'];
+$guru = $user['nama'];
+
+$paket = $conn_pdo->prepare("SELECT * FROM `paket` WHERE lembaga = '$lembaga'");
+$paket->execute();
+$paket = $paket->fetch(PDO::FETCH_ASSOC);
+$pilih_paket = $paket['paket'];
+
+date_default_timezone_set('Asia/Jakarta');
+
+function tentukan_semester($bulan)
+{
+    if ($bulan >= 1 && $bulan <= 6) { // Januari sampai Juni
+        return "Genap";
+    } elseif ($bulan >= 7 && $bulan <= 12) { // Juli sampai Desember
+        return "Ganjil";
+    } else {
+        return "Bulan tidak valid";
+    }
+}
+
+$bulan_sekarang = intval(date('n')); // Ambil nomor bulan saat ini
+
+// Mendapatkan tanggal saat ini
+$tanggal = date("d");
+// Mendapatkan nama bulan saat ini dalam bahasa Indonesia
+$bulan = date("F");
+// Menyesuaikan nama bulan dalam bahasa Indonesia
+$bulan = str_replace(
+    array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
+    array('Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'),
+    $bulan
+);
+// Mendapatkan tahun saat ini
+$tahun = date("Y");
+
+// Mendapatkan tanggal saat ini
+$tanggal = date("d");
+// Mendapatkan nomor bulan saat ini
+$bulan2 = date("n"); // "n" memberikan angka bulan tanpa leading zero
+// Mendapatkan tahun saat ini
+$tahun = date("Y");
+
+// Array nama bulan dalam bahasa Indonesia
+$nama_bulan = array(
+    1 => "Januari",
+    2 => "Februari",
+    3 => "Maret",
+    4 => "April",
+    5 => "Mei",
+    6 => "Juni",
+    7 => "Juli",
+    8 => "Agustus",
+    9 => "September",
+    10 => "Oktober",
+    11 => "November",
+    12 => "Desember"
+);
+
+// Mendapatkan nama bulan dalam bahasa Indonesia
+$nama_bulan_indonesia = $nama_bulan[$bulan2];
 ?>
 
 <!DOCTYPE html>
@@ -20,10 +81,49 @@ $user = $user->fetch(PDO::FETCH_ASSOC);
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Guru | QurMa</title>
+    <title>Guru</title>
     <link rel="shortcut icon" href="../assets/img/logo.png" />
     <link href="../dist/css/app.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        .custom-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: #3085d6;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .custom-button:hover {
+            background-color: #2565a8;
+        }
+
+        .custom-link-button {
+            display: inline-block;
+            padding: 5px 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: red;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .custom-link-button:hover {
+            background-color: darkred;
+        }
+    </style>
 </head>
 
 <body>
@@ -54,9 +154,21 @@ $user = $user->fetch(PDO::FETCH_ASSOC);
                         <a class="sidebar-link" href="data-kelompok/index.php" style="margin-top: -5px;">
                             <i class="align-middle" data-feather="file-text"></i> <span class="align-middle">Data Kelompok</span>
                         </a>
-                        <a class="sidebar-link" href="laporan-bulanan/index.php" style="margin-top: -5px;">
-                            <i class="align-middle" data-feather="trending-up"></i> <span class="align-middle">Laporan Bulanan</span>
-                        </a>
+                        <?php
+
+                        if ($pilih_paket == 'Standar') {
+                            echo '<a class="sidebar-link" href="#" style="margin-top: -5px;" id="pro-link">
+            <i class="align-middle" data-feather="trending-up"></i>
+            <span class="align-middle">Laporan Bulanan</span>
+            <sup style="font-size: smaller; vertical-align: super; background-color: red; color: white; padding: 2px 4px; border-radius: 3px;">Pro</sup>
+          </a>';
+                        } else {
+                            echo '<a class="sidebar-link" href="laporan-bulanan/index.php" style="margin-top: -5px;">
+            <i class="align-middle" data-feather="trending-up"></i> 
+            <span class="align-middle">Laporan Bulanan</span>
+          </a>';
+                        }
+                        ?>
                     </li>
 
                     <li class="sidebar-header" style="margin-top: -20px;">
@@ -134,19 +246,147 @@ $user = $user->fetch(PDO::FETCH_ASSOC);
 
                     <h1 class="h1 mb-3" style="margin-top: -10px;">Dashboard</h1>
 
-                    <div class="row">
+                    <?php
+                    $tesJilid = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM tes INNER JOIN siswa ON tes.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND tes.keterangan = '' AND tes.kategori = 'Tartil'"));
+                    $tesTahfizh = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM tes INNER JOIN siswa ON tes.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND tes.keterangan = '' AND tes.kategori = 'Tahfizh'"));
+                    $tesBelumLulusJilid = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM tes INNER JOIN siswa ON tes.nama = siswa.nama INNER JOIN kelompok ON tes.nama = kelompok.nama WHERE siswa.lembaga = '$lembaga' AND tes.keterangan = 'Belum' AND tes.kategori = 'Tartil' AND kelompok.guru = '$guru'"));
+                    $tesBelumLulusTahfizh = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM tes INNER JOIN siswa ON tes.nama = siswa.nama INNER JOIN kelompok ON tes.nama = kelompok.nama WHERE siswa.lembaga = '$lembaga' AND tes.keterangan = 'Belum' AND tes.kategori = 'Tahfizh' AND kelompok.guru = '$guru'"));
+                    ?>
+
+                    <?php if ($tesJilid > 0) : ?>
+                        <div class="alert alert-danger d-flex justify-content-between align-items-center p-2" role="alert">
+                            <span class="me-auto">Ada <?= $tesJilid ?> siswa belum Tes Jilid!</span>
+                            <a href="tes-jilid/index.php" class="btn btn-link p-0">Lihat</a>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if ($tesTahfizh > 0) : ?>
+                        <div class="alert alert-danger d-flex justify-content-between align-items-center p-2" role="alert">
+                            <span class="me-auto">Ada <?= $tesTahfizh ?> siswa belum Tes Tahfizh!</span>
+                            <a href="tes-tahfizh/index.php" class="btn btn-link p-0">Lihat</a>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if ($tesBelumLulusJilid > 0) : ?>
+                        <div class="alert alert-danger d-flex justify-content-between align-items-center p-2" role="alert">
+                            <span class="me-auto">Ada <?= $tesBelumLulusJilid ?> siswa belum Lulus Tes Jilid!</span>
+                            <a href="tes-jilid/index.php" class="btn btn-link p-0">Lihat</a>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if ($tesBelumLulusTahfizh > 0) : ?>
+                        <div class="alert alert-danger d-flex justify-content-between align-items-center p-2" role="alert">
+                            <span class="me-auto">Ada <?= $tesBelumLulusTahfizh ?> siswa belum Lulus Tes Tahfizh!</span>
+                            <a href="tes-tahfizh/index.php" class="btn btn-link p-0">Lihat</a>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php
+
+                    if ($pilih_paket == 'Standar') {
+                        echo '<div class="row">
                         <div class="col-xl-12">
                             <div class="card flex-fill w-100">
-                                <div class="card-header">
-                                    <h5 class="card-title mb-0" style="font-size: 16px;">Coming Soon</h5>
+                                <div class="card-header d-flex">
+                                    <h5 class="card-title mb-0" style="font-size: 16px;">Data Laporan</h5>
                                 </div>
-                                <div class="card-body py-3">
+
+                                <div class="card-body" style="margin-top: -10px; margin-bottom: 10px;">
+                                    Data Laporan Perkembangan Tahsin dan Tahfizh tersedia dalam <a href="../harga.php" target="_blank" class="custom-link-button">
+                                        versi Pro
+                                    </a>.
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>';
+                    } else {
+                        echo '<div class="row">
+                        <div class="col-xl-12">
+                            <div class="card flex-fill w-100">
+                                <div class="card-header d-flex">
+                                    <h5 class="card-title mb-0" style="font-size: 16px;">Data Laporan</h5>
+                                </div>
 
+                                <div class="card-body" style="margin-top: -10px; margin-bottom: 10px;">
 
+                                    <select class="form-select mb-3" aria-label="Default select example" id="bulan-pilih">
+                                        <option value="' .  $nama_bulan_indonesia . '">' . $nama_bulan_indonesia . '</option>
+                                        <option value="Januari">Januari</option>
+                                        <option value="Februari">Februari</option>
+                                        <option value="Maret">Maret</option>
+                                        <option value="April">April</option>
+                                        <option value="Mei">Mei</option>
+                                        <option value="Juni">Juni</option>
+                                        <option value="Juli">Juli</option>
+                                        <option value="Agustus">Agustus</option>
+                                        <option value="September">September</option>
+                                        <option value="Oktober">Oktober</option>
+                                        <option value="November">November</option>
+                                        <option value="Desember">Desember</option>
+                                    </select>
+
+                                    <div class="overflow-scroll">
+                                        <p>Guru Yang Sudah Input Laporan Bulanan</p>
+
+                                        <div id="data-guru"></div>
+
+                                        <p>Perkembangan Jilid Setiap Kelas</p>
+
+                                        <table class="table table-striped table-hover table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Kelas</th>
+                                                    <th scope="col">Total Siswa</th>
+                                                    <th scope="col">Tuntas</th>
+                                                    <th scope="col">Belum Tuntas</th>
+                                                    <th scope="col">Jilid 1</th>
+                                                    <th scope="col">Jilid 2</th>
+                                                    <th scope="col">Jilid 3</th>
+                                                    <th scope="col">Jilid 4</th>
+                                                    <th scope="col">Jilid 5</th>
+                                                    <th scope="col">Jilid 6</th>
+                                                    <th scope="col">Al Quran</th>
+                                                    <th scope="col">Ghorib</th>
+                                                    <th scope="col">Tajwid</th>
+                                                    <th scope="col">Tahfizh</th>
+                                                    <th scope="col">Turjuman</th>
+                                                    <th scope="col">KBQ</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="data-jilid">
+
+                                            </tbody>
+                                        </table>
+
+                                        <p>Perkembangan Juz Setiap Kelas</p>
+
+                                        <table class="table table-striped table-hover table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Kelas</th>
+                                                    <th scope="col">Total Siswa</th>
+                                                    <th scope="col">Tuntas</th>
+                                                    <th scope="col">Belum Tuntas</th>
+                                                    <th scope="col">Juz 30</th>
+                                                    <th scope="col">Juz 29</th>
+                                                    <th scope="col">Juz 28</th>
+                                                    <th scope="col">Juz 1</th>
+                                                    <th scope="col">Juz 2</th>
+                                                    <th scope="col">Juz 3</th>
+                                                    <th scope="col">Juz Lainnya</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="data-juz">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>';
+                    }
+                    ?>
                 </div>
             </main>
 
@@ -170,6 +410,81 @@ $user = $user->fetch(PDO::FETCH_ASSOC);
     </div>
 
     <script src="../dist/js/app.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var proLink = document.getElementById('pro-link');
+            if (proLink) {
+                proLink.addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevent the default link action
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Paket Pro Diperlukan',
+                        html: 'Anda harus berlangganan paket pro.<br><br><a href="../harga.php" target="_blank" class="custom-button">Langganan Sekarang</a>',
+                        showConfirmButton: false,
+                    });
+                });
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var bulanPilih = document.getElementById('bulan-pilih');
+
+            // Trigger change event to load data for the selected month
+            bulanPilih.dispatchEvent(new Event('change'));
+        });
+
+        document.getElementById('bulan-pilih').addEventListener('change', function() {
+            var selectedMonth = this.value;
+
+            // Function to send AJAX request for getLaporanGuru.php
+            function fetchLaporanGuru() {
+                var xhrLaporanGuru = new XMLHttpRequest();
+                xhrLaporanGuru.open('POST', 'getLaporanGuru.php', true);
+                xhrLaporanGuru.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhrLaporanGuru.onreadystatechange = function() {
+                    if (xhrLaporanGuru.readyState == 4 && xhrLaporanGuru.status == 200) {
+                        document.getElementById('data-guru').innerHTML = xhrLaporanGuru.responseText;
+                    }
+                };
+                xhrLaporanGuru.send('bulan=' + selectedMonth);
+            }
+
+            // Function to send AJAX request for getDataJilid.php
+            function fetchDataJilid() {
+                var xhrDataJilid = new XMLHttpRequest();
+                xhrDataJilid.open('POST', 'getDataJilid.php', true);
+                xhrDataJilid.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhrDataJilid.onreadystatechange = function() {
+                    if (xhrDataJilid.readyState == 4 && xhrDataJilid.status == 200) {
+                        document.getElementById('data-jilid').innerHTML = xhrDataJilid.responseText;
+                    }
+                };
+                xhrDataJilid.send('bulan=' + selectedMonth);
+            }
+
+            // Function to send AJAX request for getDataJuz.php
+
+            function fetchDataJuz() {
+                var xhrDataJuz = new XMLHttpRequest();
+                xhrDataJuz.open('POST', 'getDataJuz.php', true);
+                xhrDataJuz.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhrDataJuz.onreadystatechange = function() {
+                    if (xhrDataJuz.readyState == 4 && xhrDataJuz.status == 200) {
+                        document.getElementById('data-juz').innerHTML = xhrDataJuz.responseText;
+                    }
+                };
+                xhrDataJuz.send('bulan=' + selectedMonth);
+            }
+
+            // Call both functions
+            fetchLaporanGuru();
+            fetchDataJilid();
+            fetchDataJuz();
+        });
+    </script>
 
 </body>
 

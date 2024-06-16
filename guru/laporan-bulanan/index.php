@@ -80,6 +80,38 @@ $lembaga = $user['lembaga'];
                                                 <div class="card-body">
                                                     <!-- Add the filter form -->
                                                     <div class="row g-3">
+                                                        <div class="col">
+                                                            <form id="filterForm">
+                                                                <select class="form-select" aria-label="Default select example" name="kelasFilter" id="kelasFilter">
+                                                                    <option value="">Pilih Kelas</option>
+                                                                    <option value="1">1</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="6">6</option>
+                                                                </select>
+                                                            </form>
+                                                        </div>
+                                                        <div class="col">
+                                                            <form id="filterForm" class="mb-2">
+                                                                <select class="form-select mb-2" aria-label="Default select example" id='bulan-pilih'>
+                                                                    <option value="">Pilih Bulan</option>
+                                                                    <option value="Januari">Januari</option>
+                                                                    <option value="Februari">Februari</option>
+                                                                    <option value="Maret">Maret</option>
+                                                                    <option value="April">April</option>
+                                                                    <option value="Mei">Mei</option>
+                                                                    <option value="Juni">Juni</option>
+                                                                    <option value="Juli">Juli</option>
+                                                                    <option value="Agustus">Agustus</option>
+                                                                    <option value="September">September</option>
+                                                                    <option value="Oktober">Oktober</option>
+                                                                    <option value="November">November</option>
+                                                                    <option value="Desember">Desember</option>
+                                                                </select>
+                                                            </form>
+                                                        </div>
                                                         <div id="filteredResults" class="mt-2">
                                                             <!-- Display the filtered results here -->
                                                         </div>
@@ -92,7 +124,7 @@ $lembaga = $user['lembaga'];
                                 <!-- Akhir modal tambah -->
 
                                 <div class="card-body" style="margin-top: -20px;">
-                                    <p>Silahkan pilih Guru atau Kelas terlebih dahulu:</p>
+                                    <p>Silahkan pilih filter di bawah ini:</p>
                                     <!-- Add the filter form -->
                                     <div class="row g-3">
                                         <div class="col">
@@ -181,13 +213,25 @@ $lembaga = $user['lembaga'];
 
     <script>
         $(document).ready(function() {
+            // Add event listener for teacherFilter change
+            $('#kelasFilter').change(function() {
+                // Get the selected values from both filters
+                var selectedKelas = $('#kelasFilter').val();
+
+                // Call loadData with the selected values
+                loadData(selectedKelas);
+            });
+
             // Initial load of data without specific filters
             loadData();
 
-            function loadData() {
+            function loadData(selectedKelas) {
                 $.ajax({
                     type: 'POST',
                     url: 'formData.php',
+                    data: {
+                        kelasFilter: selectedKelas
+                    },
                     success: function(response) {
                         $('#filteredResults').html(response);
                     }
@@ -254,6 +298,7 @@ $lembaga = $user['lembaga'];
                 var surat = $(event.relatedTarget).closest("tr").find("td:eq(10)").text();
                 var ketuntasan_tahfizh = $(event.relatedTarget).closest("tr").find("td:eq(11)").text();
                 var catatan = $(event.relatedTarget).closest("tr").find("td:eq(12)").text();
+                var guru = $(event.relatedTarget).closest("tr").find("td:eq(13)").text();
 
                 $(this).find('#modal-edit').html($(
                     `
@@ -262,6 +307,7 @@ $lembaga = $user['lembaga'];
                     
                     <input type="hidden" name="id" value="${id}">
                     <input type="hidden" name="bulan" value="${bulan}">
+                    <input type="hidden" name="bulan" value="${guru}">
 
                     <div class="form-floating mb-2">
                         <input type="text" class="form-control" id="nama" name="nama" value="${nama}" required>

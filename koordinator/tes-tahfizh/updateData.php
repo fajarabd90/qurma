@@ -13,8 +13,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $catatan = htmlentities($_POST['catatan'], ENT_QUOTES);
     $keterangan = htmlentities($_POST['keterangan'], ENT_QUOTES);
     $kategori = htmlentities($_POST['kategori'], ENT_QUOTES);
+    $guru = htmlentities($_POST['guru'], ENT_QUOTES);
 
-    mysqli_query($conn, "UPDATE tes SET nama='$nama', jilid='$jilid', juz='$juz', surat='$surat', nilai1='$nilai1', nilai2='$nilai2', nilai3='$nilai3', catatan='$catatan', keterangan='$keterangan', kategori='$kategori' WHERE id = $id");
+    mysqli_query($conn, "UPDATE tes SET nama='$nama', jilid='$jilid', juz='$juz', surat='$surat', nilai1='$nilai1', nilai2='$nilai2', nilai3='$nilai3', catatan='$catatan', keterangan='$keterangan', kategori='$kategori', guru='$guru' WHERE id = $id");
 } else {
     header('HTTP/1.1 404 Not found');
 }

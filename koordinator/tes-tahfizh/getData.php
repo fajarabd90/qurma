@@ -14,11 +14,10 @@ $lembaga = $user['lembaga'];
 
 $searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
 
-$sql = mysqli_query($conn, "SELECT tes.id, siswa.lembaga, tes.waktu, tes.nama, siswa.kelas, kelompok.guru, tes.jilid, tes.juz, tes.surat, tes.nilai1, tes.nilai2, tes.nilai3, tes.catatan, tes.keterangan, tes.kategori
+$sql = mysqli_query($conn, "SELECT tes.id, siswa.lembaga, tes.waktu, tes.nama, siswa.kelas, tes.guru, tes.jilid, tes.juz, tes.surat, tes.nilai1, tes.nilai2, tes.nilai3, tes.catatan, tes.keterangan, tes.kategori
 FROM tes
 INNER JOIN siswa ON tes.nama = siswa.nama
-INNER JOIN kelompok ON tes.nama = kelompok.nama
-WHERE siswa.lembaga = '$lembaga' AND (tes.nama LIKE '%$searchTerm%' OR kelompok.guru LIKE '%$searchTerm%' OR tes.keterangan LIKE '%$searchTerm%') AND tes.kategori = 'Tahfizh' ORDER BY waktu DESC");
+WHERE siswa.lembaga = '$lembaga' AND (tes.nama LIKE '%$searchTerm%' OR tes.guru LIKE '%$searchTerm%' OR tes.keterangan LIKE '%$searchTerm%') AND tes.kategori = 'Tahfizh' ORDER BY waktu DESC");
 ?>
 
 <script type="text/javascript">
@@ -84,6 +83,7 @@ WHERE siswa.lembaga = '$lembaga' AND (tes.nama LIKE '%$searchTerm%' OR kelompok.
                     <td><?php echo $data['catatan']; ?></td>
                     <td><?php echo $data['keterangan']; ?></td>
                     <td style="display:none;"><?php echo $data['kategori']; ?></td>
+                    <td style="display:none;"><?php echo $data['guru']; ?></td>
                     <td><?php echo "<center>$link_update $link_delete</center>"; ?></td>
                 </tr>
             <?php } ?>

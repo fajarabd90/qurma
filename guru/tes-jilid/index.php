@@ -12,6 +12,7 @@ $user = $conn_pdo->prepare("SELECT * FROM `user` WHERE id = ?");
 $user->execute([$id]);
 $user = $user->fetch(PDO::FETCH_ASSOC);
 $lembaga = $user['lembaga'];
+$guru = $user['nama'];
 ?>
 
 <!DOCTYPE html>
@@ -62,7 +63,7 @@ $lembaga = $user['lembaga'];
                                     <h5 class="card-title mb-0" style="font-size: 16px;">Daftar Tes</h5>
                                     <div class="ms-auto d-flex align-items-center">
                                         <button type="button" class="btn btn-primary btn-sm rounded-pill" style="margin-right: 5px;" data-bs-toggle="modal" data-bs-target="#addData">
-                                            <i data-feather="edit"></i> Catat Tes
+                                            <i data-feather="edit"></i> Ajukan Tes
                                         </button>
                                     </div>
                                 </div>
@@ -100,7 +101,7 @@ $lembaga = $user['lembaga'];
                                                                     <tr>
                                                                         <th>No.</th>
                                                                         <th>Nama</th>
-                                                                        <th>Jilid</th>
+                                                                        <th>Jilid <br>(<input type='checkbox' class='form-check-input' onclick='setAllJilid(this)'> Jilid Sama)</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -260,6 +261,11 @@ $lembaga = $user['lembaga'];
             var cellKategori = row.insertCell(10);
             cellKategori.innerHTML = "<input type='hidden' class='form-control' name='kategori[]' value='Tartil'>";
             cellKategori.style.display = "none";
+
+            var cellGuru = row.insertCell(11);
+            cellGuru.innerHTML = "<input type='hidden' class='form-control' name='guru[]' value='<?= $guru ?>'>";
+            cellGuru.style.display = "none";
+
         }
 
         // Fungsi untuk menangani perubahan nilai input angka
@@ -287,6 +293,24 @@ $lembaga = $user['lembaga'];
 
         // Tambahkan event listener untuk menangani perubahan nilai input
         inputAngka.addEventListener("change", handleInputChange);
+
+        function setAllJilid(checkbox) {
+            var table = document.getElementById("dataTable").getElementsByTagName('tbody')[0];
+            var rows = table.rows;
+            var firstJilidValue = rows[0].cells[2].getElementsByTagName('select')[0].value;
+
+            if (checkbox.checked) {
+                for (var i = 0; i < rows.length; i++) {
+                    var jilidSelect = rows[i].cells[2].getElementsByTagName('select')[0];
+                    jilidSelect.value = firstJilidValue;
+                }
+            } else {
+                for (var i = 0; i < rows.length; i++) {
+                    var jilidSelect = rows[i].cells[2].getElementsByTagName('select')[0];
+                    jilidSelect.value = ''; // Mengosongkan pilihan jika checkbox tidak dicentang
+                }
+            }
+        }
     </script>
 
     <script>
@@ -362,6 +386,7 @@ $lembaga = $user['lembaga'];
                 var catatan = $(event.relatedTarget).closest("tr").find("td:eq(11)").text();
                 var keterangan = $(event.relatedTarget).closest("tr").find("td:eq(12)").text();
                 var kategori = $(event.relatedTarget).closest("tr").find("td:eq(13)").text();
+                var guru = $(event.relatedTarget).closest("tr").find("td:eq(14)").text();
 
                 $(this).find('#modal-edit').html($(
                     `
@@ -379,6 +404,7 @@ $lembaga = $user['lembaga'];
                     <input type="hidden" name="catatan" value="${catatan}">
                     <input type="hidden" name="keterangan" value="${keterangan}">
                     <input type="hidden" name="kategori" value="${kategori}">
+                    <input type="hidden" name="guru" value="${guru}">
 
                     <?php $siswa = query("SELECT * FROM siswa WHERE lembaga = '$lembaga'") ?>
                     <input class="form-control mb-2" list="datalistOptions" id="nama" placeholder="Nama Siswa" name="nama" value="${nama}" required>

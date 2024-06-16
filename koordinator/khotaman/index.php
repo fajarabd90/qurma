@@ -214,9 +214,18 @@ if (isset($_POST['download_excel'])) {
                                     <h5 class="card-title mb-0" style="font-size: 16px;">Daftar Peserta</h5>
 
                                     <div class="ms-auto d-flex align-items-center">
-                                        <form method="post">
-                                            <button type="submit" name="download_excel" class="btn btn-sm btn-primary rounded-pill"><i class="fas fa-file-excel"></i> Download Data</button>
-                                        </form>
+                                        <?php
+                                        if ($pilih_paket == 'Standar') {
+                                            echo ' <button type="button" class="btn btn-sm btn-success rounded-pill" style="margin-right: 5px;" id="pro-link2">
+                                            <i class="fas fa-file-excel"></i> Download Data
+                                            <sup style="font-size: smaller; vertical-align: super; background-color: red; color: white; padding: 2px 4px; border-radius: 3px;">Pro</sup>
+                                        </button>';
+                                        } else {
+                                            echo '<form method="post">
+                                            <button type="submit" name="download_excel" class="btn btn-sm btn-success rounded-pill"><i class="fas fa-file-excel"></i> Download Data</button>
+                                        </form>';
+                                        }
+                                        ?>
                                     </div>
                                 </div>
 
@@ -330,6 +339,23 @@ if (isset($_POST['download_excel'])) {
     </div>
 
     <script src="../../dist/js/app.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var proLink = document.getElementById('pro-link2');
+            if (proLink) {
+                proLink.addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevent the default link action
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Paket Pro Diperlukan',
+                        html: 'Anda harus berlangganan paket pro.<br><br><a href="../harga.php" target="_blank" class="custom-button">Langganan Sekarang</a>',
+                        showConfirmButton: false,
+                    });
+                });
+            }
+        });
+    </script>
 
     <script>
         $(document).ready(function() {

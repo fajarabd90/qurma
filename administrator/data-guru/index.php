@@ -21,7 +21,7 @@ $lembaga = $user['lembaga'];
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Guru | QurMa</title>
+    <title>Guru</title>
     <link rel="shortcut icon" href="../../assets/img/logo.png" />
     <link href="../../dist/css/app.css" rel="stylesheet">
     <link href="../../dist/css/table.css" rel="stylesheet">
@@ -105,6 +105,24 @@ $lembaga = $user['lembaga'];
                                                         <div class="form-floating mb-2">
                                                             <input type="text" class="form-control" id="nama" name="nama" required>
                                                             <label for="nama">Nama</label>
+                                                        </div>
+
+                                                        <div class="form-floating mb-2">
+                                                            <select class="form-select" id="status" name="status" required>
+                                                                <option selected></option>
+                                                                <option value="Koordinator">Koordinator</option>
+                                                                <option value="Guru">Guru</option>
+                                                            </select>
+                                                            <label for="status">Status</label>
+                                                        </div>
+
+                                                        <div class="form-floating mb-2">
+                                                            <select class="form-select" id="sertifikasi" name="sertifikasi" required>
+                                                                <option selected></option>
+                                                                <option value="Sudah">Sudah</option>
+                                                                <option value="Belum">Belum</option>
+                                                            </select>
+                                                            <label for="sertifikasi">Sertifikasi</label>
                                                         </div>
 
                                                         <div class="modal-footer">
@@ -241,6 +259,8 @@ $lembaga = $user['lembaga'];
                 var id = $(event.relatedTarget).closest("tr").find("td:eq(0)").text();
                 var lembaga = $(event.relatedTarget).closest("tr").find("td:eq(2)").text();
                 var nama = $(event.relatedTarget).closest("tr").find("td:eq(3)").text();
+                var status = $(event.relatedTarget).closest("tr").find("td:eq(4)").text();
+                var sertifikasi = $(event.relatedTarget).closest("tr").find("td:eq(5)").text();
 
                 $(this).find('#modal-edit').html($(
                     `
@@ -263,6 +283,24 @@ $lembaga = $user['lembaga'];
                         <div class="form-floating mb-2">
                             <input type="text" class="form-control" id="nama" name="nama" value="${nama}" required>
                             <label for="nama">Nama</label>
+                        </div>
+
+                        <div class="form-floating mb-2">
+                            <select class="form-select" id="status" name="status" required>
+                                <option selected>${status}</option>
+                                <option value="Koordinator">Koordinator</option>
+                                <option value="Guru">Guru</option>
+                            </select>
+                            <label for="status">Status</label>
+                        </div>
+
+                        <div class="form-floating mb-2">
+                            <select class="form-select" id="sertifikasi" name="sertifikasi" required>
+                                <option selected>${sertifikasi}</option>
+                                <option value="Sudah">Sudah</option>
+                                <option value="Belum">Belum</option>
+                            </select>
+                            <label for="sertifikasi">Sertifikasi</label>
                         </div>
 
                         <div class="modal-footer">

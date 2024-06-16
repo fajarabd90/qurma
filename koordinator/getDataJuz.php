@@ -25,92 +25,92 @@ if (isset($_POST['bulan'])) {
     $kelas6_siswa = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM siswa WHERE lembaga = '$lembaga' AND kelas LIKE '6%'"));
 
     //Total tuntas
-    $kelas1_tuntas = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '1%' AND ketuntasan_tahfizh = 'Tuntas' AND laporan.bulan = '$bulan'"));
-    $kelas2_tuntas = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '2%' AND ketuntasan_tahfizh = 'Tuntas' AND laporan.bulan = '$bulan'"));
-    $kelas3_tuntas = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '3%' AND ketuntasan_tahfizh = 'Tuntas' AND laporan.bulan = '$bulan'"));
-    $kelas4_tuntas = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '4%' AND ketuntasan_tahfizh = 'Tuntas' AND laporan.bulan = '$bulan'"));
-    $kelas5_tuntas = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '5%' AND ketuntasan_tahfizh = 'Tuntas' AND laporan.bulan = '$bulan'"));
-    $kelas6_tuntas = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '6%' AND ketuntasan_tahfizh = 'Tuntas' AND laporan.bulan = '$bulan'"));
+    $kelas1_tuntas = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '1%' AND laporan.ketuntasan_tahfizh = 'Tuntas' AND laporan.bulan = '$bulan'"));
+    $kelas2_tuntas = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '2%' AND laporan.ketuntasan_tahfizh = 'Tuntas' AND laporan.bulan = '$bulan'"));
+    $kelas3_tuntas = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '3%' AND laporan.ketuntasan_tahfizh = 'Tuntas' AND laporan.bulan = '$bulan'"));
+    $kelas4_tuntas = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '4%' AND laporan.ketuntasan_tahfizh = 'Tuntas' AND laporan.bulan = '$bulan'"));
+    $kelas5_tuntas = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '5%' AND laporan.ketuntasan_tahfizh = 'Tuntas' AND laporan.bulan = '$bulan'"));
+    $kelas6_tuntas = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '6%' AND laporan.ketuntasan_tahfizh = 'Tuntas' AND laporan.bulan = '$bulan'"));
 
     // Menghitung persentase siswa yang tuntas di setiap kelas
-    $persentase_tuntas_kelas1 = round($kelas1_tuntas / $kelas1_siswa * 100);
-    $persentase_tuntas_kelas2 = round($kelas2_tuntas / $kelas2_siswa * 100);
-    $persentase_tuntas_kelas3 = round($kelas3_tuntas / $kelas3_siswa * 100);
-    $persentase_tuntas_kelas4 = round($kelas4_tuntas / $kelas4_siswa * 100);
-    $persentase_tuntas_kelas5 = round($kelas5_tuntas / $kelas5_siswa * 100);
-    $persentase_tuntas_kelas6 = round($kelas6_tuntas / $kelas6_siswa * 100);
+    $persentase_tuntas_kelas1 = ($kelas1_siswa != 0) ? round($kelas1_tuntas / $kelas1_siswa * 100) : 0;
+    $persentase_tuntas_kelas2 = ($kelas2_siswa != 0) ? round($kelas2_tuntas / $kelas2_siswa * 100) : 0;
+    $persentase_tuntas_kelas3 = ($kelas3_siswa != 0) ? round($kelas3_tuntas / $kelas3_siswa * 100) : 0;
+    $persentase_tuntas_kelas4 = ($kelas4_siswa != 0) ? round($kelas4_tuntas / $kelas4_siswa * 100) : 0;
+    $persentase_tuntas_kelas5 = ($kelas5_siswa != 0) ? round($kelas5_tuntas / $kelas5_siswa * 100) : 0;
+    $persentase_tuntas_kelas6 = ($kelas6_siswa != 0) ? round($kelas6_tuntas / $kelas6_siswa * 100) : 0;
 
     //Total belum tuntas
-    $kelas1_belum = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '1%' AND ketuntasan_tahfizh = 'Belum Tuntas' AND laporan.bulan = '$bulan'"));
-    $kelas2_belum = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '2%' AND ketuntasan_tahfizh = 'Belum Tuntas' AND laporan.bulan = '$bulan'"));
-    $kelas3_belum = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '3%' AND ketuntasan_tahfizh = 'Belum Tuntas' AND laporan.bulan = '$bulan'"));
-    $kelas4_belum = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '4%' AND ketuntasan_tahfizh = 'Belum Tuntas' AND laporan.bulan = '$bulan'"));
-    $kelas5_belum = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '5%' AND ketuntasan_tahfizh = 'Belum Tuntas' AND laporan.bulan = '$bulan'"));
-    $kelas6_belum = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '6%' AND ketuntasan_tahfizh = 'Belum Tuntas' AND laporan.bulan = '$bulan'"));
+    $kelas1_belum = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '1%' AND laporan.ketuntasan_tahfizh = 'Belum Tuntas' AND laporan.bulan = '$bulan'"));
+    $kelas2_belum = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '2%' AND laporan.ketuntasan_tahfizh = 'Belum Tuntas' AND laporan.bulan = '$bulan'"));
+    $kelas3_belum = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '3%' AND laporan.ketuntasan_tahfizh = 'Belum Tuntas' AND laporan.bulan = '$bulan'"));
+    $kelas4_belum = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '4%' AND laporan.ketuntasan_tahfizh = 'Belum Tuntas' AND laporan.bulan = '$bulan'"));
+    $kelas5_belum = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '5%' AND laporan.ketuntasan_tahfizh = 'Belum Tuntas' AND laporan.bulan = '$bulan'"));
+    $kelas6_belum = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '6%' AND laporan.ketuntasan_tahfizh = 'Belum Tuntas' AND laporan.bulan = '$bulan'"));
 
     // Menghitung persentase siswa yang belum tuntas di setiap kelas
-    $persentase_belum_kelas1 =  round($kelas1_belum / $kelas1_siswa * 100);
-    $persentase_belum_kelas2 =  round($kelas2_belum / $kelas2_siswa * 100);
-    $persentase_belum_kelas3 =  round($kelas3_belum / $kelas3_siswa * 100);
-    $persentase_belum_kelas4 =  round($kelas4_belum / $kelas4_siswa * 100);
-    $persentase_belum_kelas5 =  round($kelas5_belum / $kelas5_siswa * 100);
-    $persentase_belum_kelas6 =  round($kelas6_belum / $kelas6_siswa * 100);
+    $persentase_belum_kelas1 = ($kelas1_siswa != 0) ? round($kelas1_belum / $kelas1_siswa * 100) : 0;
+    $persentase_belum_kelas2 = ($kelas2_siswa != 0) ? round($kelas2_belum / $kelas2_siswa * 100) : 0;
+    $persentase_belum_kelas3 = ($kelas3_siswa != 0) ? round($kelas3_belum / $kelas3_siswa * 100) : 0;
+    $persentase_belum_kelas4 = ($kelas4_siswa != 0) ? round($kelas4_belum / $kelas4_siswa * 100) : 0;
+    $persentase_belum_kelas5 = ($kelas5_siswa != 0) ? round($kelas5_belum / $kelas5_siswa * 100) : 0;
+    $persentase_belum_kelas6 = ($kelas6_siswa != 0) ? round($kelas6_belum / $kelas6_siswa * 100) : 0;
 
-    //Total juz 30
-    $kelas1_30 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '1%' AND juz = '30' AND laporan.bulan = '$bulan'"));
-    $kelas2_30 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '2%' AND juz = '30' AND laporan.bulan = '$bulan'"));
-    $kelas3_30 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '3%' AND juz = '30' AND laporan.bulan = '$bulan'"));
-    $kelas4_30 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '4%' AND juz = '30' AND laporan.bulan = '$bulan'"));
-    $kelas5_30 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '5%' AND juz = '30' AND laporan.bulan = '$bulan'"));
-    $kelas6_30 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '6%' AND juz = '30' AND laporan.bulan = '$bulan'"));
+    //Total laporan.juz 30
+    $kelas1_30 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '1%' AND laporan.juz = '30' AND laporan.bulan = '$bulan'"));
+    $kelas2_30 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '2%' AND laporan.juz = '30' AND laporan.bulan = '$bulan'"));
+    $kelas3_30 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '3%' AND laporan.juz = '30' AND laporan.bulan = '$bulan'"));
+    $kelas4_30 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '4%' AND laporan.juz = '30' AND laporan.bulan = '$bulan'"));
+    $kelas5_30 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '5%' AND laporan.juz = '30' AND laporan.bulan = '$bulan'"));
+    $kelas6_30 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '6%' AND laporan.juz = '30' AND laporan.bulan = '$bulan'"));
 
-    //Total juz 29
-    $kelas1_29 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '1%' AND juz = '29' AND laporan.bulan = '$bulan'"));
-    $kelas2_29 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '2%' AND juz = '29' AND laporan.bulan = '$bulan'"));
-    $kelas3_29 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '3%' AND juz = '29' AND laporan.bulan = '$bulan'"));
-    $kelas4_29 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '4%' AND juz = '29' AND laporan.bulan = '$bulan'"));
-    $kelas5_29 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '5%' AND juz = '29' AND laporan.bulan = '$bulan'"));
-    $kelas6_29 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '6%' AND juz = '29' AND laporan.bulan = '$bulan'"));
+    //Total laporan.juz 29
+    $kelas1_29 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '1%' AND laporan.juz = '29' AND laporan.bulan = '$bulan'"));
+    $kelas2_29 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '2%' AND laporan.juz = '29' AND laporan.bulan = '$bulan'"));
+    $kelas3_29 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '3%' AND laporan.juz = '29' AND laporan.bulan = '$bulan'"));
+    $kelas4_29 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '4%' AND laporan.juz = '29' AND laporan.bulan = '$bulan'"));
+    $kelas5_29 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '5%' AND laporan.juz = '29' AND laporan.bulan = '$bulan'"));
+    $kelas6_29 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '6%' AND laporan.juz = '29' AND laporan.bulan = '$bulan'"));
 
-    //Total juz 28
-    $kelas1_28 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '1%' AND juz = '28' AND laporan.bulan = '$bulan'"));
-    $kelas2_28 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '2%' AND juz = '28' AND laporan.bulan = '$bulan'"));
-    $kelas3_28 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '3%' AND juz = '28' AND laporan.bulan = '$bulan'"));
-    $kelas4_28 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '4%' AND juz = '28' AND laporan.bulan = '$bulan'"));
-    $kelas5_28 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '5%' AND juz = '28' AND laporan.bulan = '$bulan'"));
-    $kelas6_28 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '6%' AND juz = '28' AND laporan.bulan = '$bulan'"));
+    //Total laporan.juz 28
+    $kelas1_28 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '1%' AND laporan.juz = '28' AND laporan.bulan = '$bulan'"));
+    $kelas2_28 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '2%' AND laporan.juz = '28' AND laporan.bulan = '$bulan'"));
+    $kelas3_28 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '3%' AND laporan.juz = '28' AND laporan.bulan = '$bulan'"));
+    $kelas4_28 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '4%' AND laporan.juz = '28' AND laporan.bulan = '$bulan'"));
+    $kelas5_28 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '5%' AND laporan.juz = '28' AND laporan.bulan = '$bulan'"));
+    $kelas6_28 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '6%' AND laporan.juz = '28' AND laporan.bulan = '$bulan'"));
 
-    //Total juz 1
-    $kelas1_1 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '1%' AND juz = '1' AND laporan.bulan = '$bulan'"));
-    $kelas2_1 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '2%' AND juz = '1' AND laporan.bulan = '$bulan'"));
-    $kelas3_1 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '3%' AND juz = '1' AND laporan.bulan = '$bulan'"));
-    $kelas4_1 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '4%' AND juz = '1' AND laporan.bulan = '$bulan'"));
-    $kelas5_1 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '5%' AND juz = '1' AND laporan.bulan = '$bulan'"));
-    $kelas6_1 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '6%' AND juz = '1' AND laporan.bulan = '$bulan'"));
+    //Total laporan.juz 1
+    $kelas1_1 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '1%' AND laporan.juz = '1' AND laporan.bulan = '$bulan'"));
+    $kelas2_1 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '2%' AND laporan.juz = '1' AND laporan.bulan = '$bulan'"));
+    $kelas3_1 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '3%' AND laporan.juz = '1' AND laporan.bulan = '$bulan'"));
+    $kelas4_1 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '4%' AND laporan.juz = '1' AND laporan.bulan = '$bulan'"));
+    $kelas5_1 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '5%' AND laporan.juz = '1' AND laporan.bulan = '$bulan'"));
+    $kelas6_1 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '6%' AND laporan.juz = '1' AND laporan.bulan = '$bulan'"));
 
-    //Total juz 2
-    $kelas1_2 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '1%' AND juz = '2' AND laporan.bulan = '$bulan'"));
-    $kelas2_2 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '2%' AND juz = '2' AND laporan.bulan = '$bulan'"));
-    $kelas3_2 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '3%' AND juz = '2' AND laporan.bulan = '$bulan'"));
-    $kelas4_2 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '4%' AND juz = '2' AND laporan.bulan = '$bulan'"));
-    $kelas5_2 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '5%' AND juz = '2' AND laporan.bulan = '$bulan'"));
-    $kelas6_2 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '6%' AND juz = '2' AND laporan.bulan = '$bulan'"));
+    //Total laporan.juz 2
+    $kelas1_2 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '1%' AND laporan.juz = '2' AND laporan.bulan = '$bulan'"));
+    $kelas2_2 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '2%' AND laporan.juz = '2' AND laporan.bulan = '$bulan'"));
+    $kelas3_2 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '3%' AND laporan.juz = '2' AND laporan.bulan = '$bulan'"));
+    $kelas4_2 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '4%' AND laporan.juz = '2' AND laporan.bulan = '$bulan'"));
+    $kelas5_2 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '5%' AND laporan.juz = '2' AND laporan.bulan = '$bulan'"));
+    $kelas6_2 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '6%' AND laporan.juz = '2' AND laporan.bulan = '$bulan'"));
 
-    //Total juz 3
-    $kelas1_3 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '1%' AND juz = '3' AND laporan.bulan = '$bulan'"));
-    $kelas2_3 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '2%' AND juz = '3' AND laporan.bulan = '$bulan'"));
-    $kelas3_3 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '3%' AND juz = '3' AND laporan.bulan = '$bulan'"));
-    $kelas4_3 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '4%' AND juz = '3' AND laporan.bulan = '$bulan'"));
-    $kelas5_3 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '5%' AND juz = '3' AND laporan.bulan = '$bulan'"));
-    $kelas6_3 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '6%' AND juz = '3' AND laporan.bulan = '$bulan'"));
+    //Total laporan.juz 3
+    $kelas1_3 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '1%' AND laporan.juz = '3' AND laporan.bulan = '$bulan'"));
+    $kelas2_3 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '2%' AND laporan.juz = '3' AND laporan.bulan = '$bulan'"));
+    $kelas3_3 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '3%' AND laporan.juz = '3' AND laporan.bulan = '$bulan'"));
+    $kelas4_3 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '4%' AND laporan.juz = '3' AND laporan.bulan = '$bulan'"));
+    $kelas5_3 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '5%' AND laporan.juz = '3' AND laporan.bulan = '$bulan'"));
+    $kelas6_3 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '6%' AND laporan.juz = '3' AND laporan.bulan = '$bulan'"));
 
-    // Total juz lainnya
-    $kelas1_lain = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '1%' AND juz NOT IN ('1', '2', '3', '28', '29', '30') AND laporan.bulan = '$bulan'"));
-    $kelas2_lain = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '2%' AND juz NOT IN ('1', '2', '3', '28', '29', '30') AND laporan.bulan = '$bulan'"));
-    $kelas3_lain = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '3%' AND juz NOT IN ('1', '2', '3', '28', '29', '30') AND laporan.bulan = '$bulan'"));
-    $kelas4_lain = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '4%' AND juz NOT IN ('1', '2', '3', '28', '29', '30') AND laporan.bulan = '$bulan'"));
-    $kelas5_lain = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '5%' AND juz NOT IN ('1', '2', '3', '28', '29', '30') AND laporan.bulan = '$bulan'"));
-    $kelas6_lain = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE lembaga = '$lembaga' AND kelas LIKE '6%' AND juz NOT IN ('1', '2', '3', '28', '29', '30') AND laporan.bulan = '$bulan'"));
+    // Total laporan.juz lainnya
+    $kelas1_lain = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '1%' AND laporan.juz NOT IN ('1', '2', '3', '28', '29', '30') AND laporan.bulan = '$bulan'"));
+    $kelas2_lain = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '2%' AND laporan.juz NOT IN ('1', '2', '3', '28', '29', '30') AND laporan.bulan = '$bulan'"));
+    $kelas3_lain = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '3%' AND laporan.juz NOT IN ('1', '2', '3', '28', '29', '30') AND laporan.bulan = '$bulan'"));
+    $kelas4_lain = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '4%' AND laporan.juz NOT IN ('1', '2', '3', '28', '29', '30') AND laporan.bulan = '$bulan'"));
+    $kelas5_lain = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '5%' AND laporan.juz NOT IN ('1', '2', '3', '28', '29', '30') AND laporan.bulan = '$bulan'"));
+    $kelas6_lain = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM laporan INNER JOIN siswa ON laporan.nama = siswa.nama WHERE siswa.lembaga = '$lembaga' AND siswa.kelas LIKE '6%' AND laporan.juz NOT IN ('1', '2', '3', '28', '29', '30') AND laporan.bulan = '$bulan'"));
 
 
     // Check if the query was successful

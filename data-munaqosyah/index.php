@@ -97,7 +97,7 @@ require '../config.php';
                                 <!-- Akhir modal edit -->
 
                                 <?php
-                                $lembagaQuery = mysqli_query($conn, "SELECT lembaga FROM pembayaran ORDER BY lembaga ASC");
+                                $lembagaQuery = mysqli_query($conn, "SELECT DISTINCT lembaga FROM pra_munaqosyah ORDER BY lembaga ASC");
                                 $lembagas = mysqli_fetch_all($lembagaQuery, MYSQLI_ASSOC);
                                 ?>
 

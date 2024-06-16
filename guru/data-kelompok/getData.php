@@ -19,7 +19,7 @@ $sql = mysqli_query($conn, "SELECT kelompok.id, siswa.lembaga, kelompok.nama, si
  FROM siswa
  INNER JOIN placement ON siswa.nama = placement.nama
  INNER JOIN kelompok ON kelompok.nama = placement.nama
- WHERE siswa.lembaga = '$lembaga' AND kelompok.guru = '$guru' AND (siswa.kelas LIKE '%$searchTerm%' OR kelompok.nama LIKE '%$searchTerm%') ORDER BY kelompok.guru, placement.jilid, siswa.kelas, kelompok.nama ASC");
+ WHERE siswa.lembaga = '$lembaga' AND kelompok.guru = '$guru' AND (siswa.kelas LIKE '%$searchTerm%' OR kelompok.nama LIKE '%$searchTerm%') ORDER BY siswa.kelas, siswa.nama ASC");
 ?>
 
 <div class="tableFixHead" style="height: 400px;">

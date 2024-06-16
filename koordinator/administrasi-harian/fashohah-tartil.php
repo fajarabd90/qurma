@@ -47,7 +47,7 @@ $sql = mysqli_query($conn, "SELECT * FROM siswa WHERE lembaga = '$lembaga' ORDER
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Presensi Dan Nilai Fashohah-Tartil | QurMa</title>
+    <title>Presensi Dan Nilai Fashohah-Tartil</title>
     <link rel="shortcut icon" href="../../assets/img/logo.png" />
     <!-- Menggunakan Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">

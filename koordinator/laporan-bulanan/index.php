@@ -229,6 +229,7 @@ $lembaga = $user['lembaga'];
                 var surat = $(event.relatedTarget).closest("tr").find("td:eq(10)").text();
                 var ketuntasan_tahfizh = $(event.relatedTarget).closest("tr").find("td:eq(11)").text();
                 var catatan = $(event.relatedTarget).closest("tr").find("td:eq(12)").text();
+                var guru = $(event.relatedTarget).closest("tr").find("td:eq(13)").text();
 
                 $(this).find('#modal-edit').html($(
                     `
@@ -237,6 +238,7 @@ $lembaga = $user['lembaga'];
                     
                     <input type="hidden" name="id" value="${id}">
                     <input type="hidden" name="bulan" value="${bulan}">
+                    <input type="hidden" name="guru" value="${guru}">
 
                     <div class="form-floating mb-2">
                         <input type="text" class="form-control" id="nama" name="nama" value="${nama}" required>

@@ -14,6 +14,8 @@ $sql = mysqli_query($conn, "SELECT * FROM guru WHERE lembaga LIKE '%$searchTerm%
                 <th scope="col">No</th>
                 <th scope="col">Lembaga</th>
                 <th scope="col">Nama</th>
+                <th scope="col">Status</th>
+                <th scope="col">Sertifikasi</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -28,7 +30,9 @@ $sql = mysqli_query($conn, "SELECT * FROM guru WHERE lembaga LIKE '%$searchTerm%
                     <td style="display:none;"><?php echo $data['id']; ?></td>
                     <td><?php echo $no++; ?></td>
                     <td><?php echo $data['lembaga']; ?></td>
-                    <td><?php echo ucwords(strtolower($data['nama'])); ?></td>
+                    <td><?php echo $data['nama']; ?></td>
+                    <td><?php echo $data['status']; ?></td>
+                    <td><?php echo $data['sertifikasi']; ?></td>
                     <td><?php echo "<center>$link_update $link_delete</center>"; ?></td>
                 </tr>
             <?php } ?>
