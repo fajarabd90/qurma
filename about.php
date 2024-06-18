@@ -22,7 +22,7 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/pricing/">
 
-    <link href="qurma/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="ummi/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 
@@ -216,7 +216,7 @@
 
             <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
 
-                <img src="qurma/assets/img/logo.png" alt="" height="100" class="mb-2">
+                <img src="ummi/assets/img/logo.png" alt="" height="100" class="mb-2">
 
                 <h1 class="display-4 fw-normal">Qur-Ma</h1>
 
@@ -267,7 +267,7 @@
 
                     <div class="col-12 col-md">
 
-                        <img class="mb-2" src="qurma/assets/img/logo.png" alt="" height="30">
+                        <img class="mb-2" src="ummi/assets/img/logo.png" alt="" height="30">
 
                         <small class="d-block mb-3 text-muted">&copy; 2024</small>
 

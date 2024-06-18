@@ -22,14 +22,13 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/pricing/">
 
-    <link href="qurma/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="ummi/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 
 
 
     <style>
-
         .bd-placeholder-img {
 
             font-size: 1.125rem;
@@ -145,7 +144,6 @@
             /* Untuk membuatnya terpusat secara vertikal */
 
         }
-
     </style>
 
 </head>
@@ -178,7 +176,7 @@
 
                 <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
 
-                    <img src="qurma/assets/img/logo.png" alt="" height="50" class="me-2">
+                    <img src="ummi/assets/img/logo.png" alt="" height="50" class="me-2">
 
                     <span class="fs-4">Qur-Ma</span>
 
@@ -202,7 +200,7 @@
 
             <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
 
-                <img src="qurma/assets/img/logo-ummi.png" alt="" height="100" class="mb-2">
+                <img src="ummi/assets/img/logo-ummi.png" alt="" height="100" class="mb-2">
 
                 <h1 class="display-4 fw-normal">LMS Metode UMMI</h1>
 
@@ -624,7 +622,7 @@
 
                     <div class="col-12 col-md">
 
-                        <img class="mb-2" src="qurma/assets/img/logo.png" alt="" height="30">
+                        <img class="mb-2" src="ummi/assets/img/logo.png" alt="" height="30">
 
                         <small class="d-block mb-3 text-muted">&copy; 2024</small>
 
@@ -645,7 +643,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
     <script>
-
         function togglePasswordVisibility() {
 
             var passwordField = document.getElementById("password");
@@ -669,7 +666,6 @@
             }
 
         }
-
     </script>
 
 </body>

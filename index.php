@@ -45,7 +45,7 @@ if (isset($_POST['submit'])) {
   <title>LMS Metode UMMI</title>
   <link rel="shortcut icon" href="assets/img/logo.png" />
   <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/pricing/">
-  <link href="qurma/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="ummi/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -134,7 +134,7 @@ if (isset($_POST['submit'])) {
     <header>
       <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
         <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
-          <img src="qurma/assets/img/logo.png" alt="" height="50" class="me-2">
+          <img src="ummi/assets/img/logo.png" alt="" height="50" class="me-2">
           <span class="fs-4">Qur-Ma</span>
         </a>
 
@@ -146,7 +146,7 @@ if (isset($_POST['submit'])) {
       </div>
 
       <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-        <img src="qurma/assets/img/logo-ummi.png" alt="" height="100" class="mb-2">
+        <img src="ummi/assets/img/logo-ummi.png" alt="" height="100" class="mb-2">
         <h1 class="display-4 fw-normal">LMS Metode UMMI</h1>
         <p class="fs-5 text-muted">Solusi mudah administrasi Anda</p>
       </div>
@@ -173,7 +173,7 @@ if (isset($_POST['submit'])) {
             <!-- Form sign-in -->
             <form action="" method="post">
               <center>
-                <img class="mb-1" src="qurma/assets/img/logo-ummi.png" alt="" width="80" height="80">
+                <img class="mb-1" src="ummi/assets/img/logo-ummi.png" alt="" width="80" height="80">
                 <h1 class="h3 mb-3 fw-normal">LMS Metode UMMI</h1>
               </center>
               <?php
@@ -231,7 +231,7 @@ if (isset($_POST['submit'])) {
             <!-- Form demo -->
             <form action="" method="post">
               <center>
-                <img class="mb-1" src="qurma/assets/img/logo-ummi.png" alt="" width="80" height="80">
+                <img class="mb-1" src="ummi/assets/img/logo-ummi.png" alt="" width="80" height="80">
                 <h1 class="h3 mb-3 fw-normal">LMS Metode UMMI</h1>
               </center>
               <?php
@@ -277,21 +277,21 @@ if (isset($_POST['submit'])) {
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active" data-bs-interval="10000">
-            <img src="qurma/assets/img/Dashboard.png" class="d-block w-100" alt="...">
+            <img src="ummi/assets/img/Dashboard.png" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
               <h5>Halaman Dashboard</h5>
               <p>Memuat laporan perkembangan jilid.</p>
             </div>
           </div>
           <div class="carousel-item" data-bs-interval="2000">
-            <img src="qurma/assets/img/Data Tes Jilid.png" class="d-block w-100" alt="...">
+            <img src="ummi/assets/img/Data Tes Jilid.png" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
               <h5>Halaman Tes Jilid</h5>
               <p>Mengelola tes jilid dan mencatatkan hasilnya.</p>
             </div>
           </div>
           <div class="carousel-item">
-            <img src="qurma/assets/img/Data Munaqosyah.png" class="d-block w-100" alt="...">
+            <img src="ummi/assets/img/Data Munaqosyah.png" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
               <h5>Halaman Munaqosyah</h5>
               <p>Mengelola data Munaqosyah, mencetak kartu Munaqosyah dan mengintegrasikan data ke SIM UF .</p>
@@ -315,7 +315,7 @@ if (isset($_POST['submit'])) {
       <div class="card mb-3 col-12">
         <div class="row g-0">
           <div class="col-md-4">
-            <img src="qurma/assets/img/Dashboard.png" class="img-fluid rounded-start" alt="...">
+            <img src="ummi/assets/img/Dashboard.png" class="img-fluid rounded-start" alt="...">
           </div>
           <div class="col-md-8">
             <div class="card-body">
@@ -329,7 +329,7 @@ if (isset($_POST['submit'])) {
       <div class="card mb-3 col-12">
         <div class="row g-0">
           <div class="col-md-4">
-            <img src="qurma/assets/img/Data Tes Jilid.png" class="img-fluid rounded-start" alt="...">
+            <img src="ummi/assets/img/Data Tes Jilid.png" class="img-fluid rounded-start" alt="...">
           </div>
           <div class="col-md-8">
             <div class="card-body">
@@ -343,7 +343,7 @@ if (isset($_POST['submit'])) {
       <div class="card mb-3 col-12">
         <div class="row g-0">
           <div class="col-md-4">
-            <img src="qurma/assets/img/Data Munaqosyah.png" class="img-fluid rounded-start" alt="...">
+            <img src="ummi/assets/img/Data Munaqosyah.png" class="img-fluid rounded-start" alt="...">
           </div>
           <div class="col-md-8">
             <div class="card-body">
@@ -357,7 +357,7 @@ if (isset($_POST['submit'])) {
       <div class="card mb-3 col-12">
         <div class="row g-0">
           <div class="col-md-4">
-            <img src="qurma/assets/img/Data Khotaman.png" class="img-fluid rounded-start" alt="...">
+            <img src="ummi/assets/img/Data Khotaman.png" class="img-fluid rounded-start" alt="...">
           </div>
           <div class="col-md-8">
             <div class="card-body">
@@ -373,7 +373,7 @@ if (isset($_POST['submit'])) {
       <footer class="pt-4 my-md-5 pt-md-5 border-top">
         <div class="row">
           <div class="col-12 col-md">
-            <img class="mb-2" src="qurma/assets/img/logo.png" alt="" height="30">
+            <img class="mb-2" src="ummi/assets/img/logo.png" alt="" height="30">
             <small class="d-block mb-3 text-muted">&copy; 2024</small>
           </div>
         </div>
