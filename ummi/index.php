@@ -17,10 +17,13 @@ if (isset($_POST['submit'])) {
       header('location:administrator/index.php');
     } elseif ($row['role'] == 'koordinator') {
       $_SESSION['koordinator'] = $row['id'];
-      header('location:ummi/koordinator/index.php');
+      header('location:koordinator/index.php');
     } elseif ($row['role'] == 'guru') {
       $_SESSION['guru'] = $row['id'];
-      header('location:ummi/guru/index.php');
+      header('location:guru/index.php');
+    } elseif ($row['role'] == 'siswa') {
+      $_SESSION['siswa'] = $row['id'];
+      header('location:siswa/index.php');
     } else {
       $message[] = 'Pengguna tidak ditemukan!';
     }
@@ -39,7 +42,7 @@ if (isset($_POST['submit'])) {
   <meta name="description" content="">
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Hugo 0.104.2">
-  <title>Produk UMMI</title>
+  <title>LMS Metode UMMI</title>
   <link rel="shortcut icon" href="assets/img/logo.png" />
   <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/pricing/">
   <link href="dist/css/bootstrap.min.css" rel="stylesheet">
@@ -135,24 +138,84 @@ if (isset($_POST['submit'])) {
         </a>
 
         <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-          <a class="me-3 py-2 text-dark text-decoration-none" href="index.php">Produk</a>
+          <a class="me-3 py-2 text-dark text-decoration-none" href="index.php">Fitur</a>
+          <a class="me-3 py-2 text-dark text-decoration-none" href="harga.php">Harga</a>
           <a class="py-2 text-dark text-decoration-none" href="about.php">Tentang Kami</a>
         </nav>
       </div>
 
       <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
         <img src="assets/img/logo-ummi.png" alt="" height="100" class="mb-2">
-        <h1 class="display-4 fw-normal">LMS Penilaian Metode UMMI</h1>
+        <h1 class="display-4 fw-normal">LMS Metode UMMI</h1>
         <p class="fs-5 text-muted">Solusi mudah administrasi Anda</p>
       </div>
 
       <center>
         <div class="d-grid gap-2 d-md-block mx-auto mb-3 col-6">
-          <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#demo">Get Demo</button>
-          <a href="harga.php" class="btn btn-primary" role="button">Harga</a>
+          <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#signin">Log-in</button>
+          <button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#demo">Get Demo</button>
+          <a href="harga.php" class="btn btn-primary" role="button">Get Product</a>
         </div>
       </center>
     </header>
+
+    <!-- Modal sign-in-->
+    <div class="modal fade" id="signin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="fas fa-sign-in-alt"></i> Log-in</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+            <!-- Form sign-in -->
+            <form action="" method="post">
+              <center>
+                <img class="mb-1" src="assets/img/logo-ummi.png" alt="" width="80" height="80">
+                <h1 class="h3 mb-3 fw-normal">LMS Metode UMMI</h1>
+              </center>
+              <?php
+              if (isset($message)) {
+                foreach ($message as $msg) {
+                  echo '
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "' . addslashes($msg) . '",
+                showConfirmButton: true,
+                confirmButtonText: "OK"
+            });
+        });
+        </script>
+        ';
+                }
+              }
+              ?>
+
+
+              <div class="form-floating mb-2">
+
+                <input type="email" class="form-control" name="email" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Email address</label>
+              </div>
+              <div class="form-floating mb-2">
+                <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                <label for="floatingPassword">Password</label>
+                <div class="password-toggle" id="password" onclick="togglePasswordVisibility()">
+                  <i id="eyeIcon" class='far fa-eye'></i>
+                </div>
+              </div>
+              <button class="w-100 btn btn-lg btn-primary mb-2" type="submit" name="submit">Submit</button>
+            </form>
+            <!-- Akhir form sign-in -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Akhir modal sign-in -->
 
     <!-- Modal demo-->
     <div class="modal fade" id="demo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -168,7 +231,7 @@ if (isset($_POST['submit'])) {
             <form action="" method="post">
               <center>
                 <img class="mb-1" src="assets/img/logo-ummi.png" alt="" width="80" height="80">
-                <h1 class="h3 mb-3 fw-normal">LMS Penilaian Metode UMMI</h1>
+                <h1 class="h3 mb-3 fw-normal">LMS Metode UMMI</h1>
               </center>
               <?php
               if (isset($message)) {
